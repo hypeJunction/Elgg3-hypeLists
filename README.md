@@ -1,6 +1,6 @@
 hypeLists
 =========
-![Elgg 2.0](https://img.shields.io/badge/Elgg-2.0.x-orange.svg?style=flat-square)
+![Elgg 3.0](https://img.shields.io/badge/Elgg-3.0-orange.svg?style=flat-square)
 
 A set of tools that improve UX and simplify common list patterns for developers.
 
