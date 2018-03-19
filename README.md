@@ -138,7 +138,7 @@ echo elgg_view('lists/objects', [
 	'show_filter' => true,
 	'filter_options' => [
 		'mine',
-		'friends',
+		'friends_items',
 		'custom_filter', // use hooks to append custom queries
 	],
 

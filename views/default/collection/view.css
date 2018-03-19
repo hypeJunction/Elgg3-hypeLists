@@ -1,0 +1,4 @@
+.elgg-pagination-infinite > li:first-child > a:before,
+.elgg-pagination-infinite > li:last-child > a:after {
+	content: none;
+}

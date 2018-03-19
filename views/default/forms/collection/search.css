@@ -1,0 +1,37 @@
+.elgg-sortable-list-fieldset {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0;
+}
+
+.elgg-sortable-list-fieldset > .elgg-field {
+	margin: 0;
+	flex: 1 1 auto;
+	padding: 0.25rem;
+}
+
+.elgg-sortable-list-form-toggle {
+	display: inline-block;
+	width: 100%;
+	text-align: right;
+	padding: 0.25rem;
+}
+
+.elgg-form-collection-search {
+	margin-bottom: 1rem;
+}
+
+.elgg-form-collection-search .elgg-form-footer {
+	text-align: right;
+	padding: 0.25rem;
+}
+
+.elgg-form-collection-search .elgg-field {
+	margin: 0;
+}
+
+.elgg-form-collection-search input[type="text"],
+.elgg-form-collection-search select,
+.elgg-form-collection-search .select {
+	width: 100%;
+}

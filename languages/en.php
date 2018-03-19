@@ -1,6 +1,6 @@
 <?php
 
-$english = array(
+return [
 	'lists:settings:pagination_type' => 'Default pagination type',
 	'lists:settings:pagination_type:help' => 'Setting this option will replace pagination with an ajaxed alternative across your site.
 		If such behavior is not desired, please consult the README to learn how to achieve this behavior programatically.',
@@ -41,10 +41,12 @@ $english = array(
 	'sort:object:last_action::desc' => 'Latest activity first',
 	'sort:object:likes_count::asc' => 'Least likes first',
 	'sort:object:likes_count::desc' => 'Most likes first',
-	'sort:object:filter:' => 'All',
-	'sort:object:filter:friends' => 'Friends',
-	'sort:object:filter:label' => 'Show',
-	'sort:object:filter:mine' => 'Mine',
+	'sort:object:filter:all' => 'All',
+	'sort:object:filter:is_owned_by_friends_of' => '%s\'s Friends',
+	'sort:object:filter:label' => 'Posted by',
+	'sort:object:filter:placeholder' => 'Select filter ...',
+	'sort:object:filter:is_owned_by' => '%s',
+	'sort:object:filter:is_contained_by_users_groups' => 'Members in %s\'s groups',
 	'sort:object:responses_count::asc' => 'Least responses first',
 	'sort:object:responses_count::desc' => 'Most responses first',
 	'sort:object:search:label' => 'Search',
@@ -60,6 +62,7 @@ $english = array(
 	'sort:user:friend_count::asc' => 'Least friends first',
 	'sort:user:friend_count::desc' => 'Most friends first',
 	'sort:user:label' => 'Sort',
+	'sort:user:placeholder' => 'Select sort ...',
 	'sort:user:last_action::asc' => 'Least recently online',
 	'sort:user:last_action::desc' => 'Most recently online',
 	'sort:user:search:label' => 'Search',
@@ -71,6 +74,11 @@ $english = array(
 	'sort:settings:object' => 'Object sorting',
 	'sort:menu:filter' => 'Search and filter',
 	'sort:search:empty' => 'No results matching your query',
-);
+	'sort:object:search:created_after' => 'Posted after',
+	'sort:object:search:created_before' => 'Posted before',
 
-add_translation("en", $english);
+	'collection:search' => 'Search in %s',
+	'collection:more' => 'View all',
+	'collection:no_results' => 'There are no items to display',
+];
+

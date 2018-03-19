@@ -13,17 +13,17 @@ use ElggEntity;
 
 $items = $vars['items'];
 
-$list_class = array('elgg-list');
+$list_class = ['elgg-list'];
 if (isset($vars['list_class'])) {
 	$list_class[] = $vars['list_class'];
 }
 
-$item_class = array('elgg-item elgg-discoverable');
+$item_class = ['elgg-item elgg-discoverable'];
 if (isset($vars['item_class'])) {
 	$item_class[] = $vars['item_class'];
 }
 
-$list_items = array();
+$list_items = [];
 
 if (is_array($items) || $items instanceof ElggBatch) {
 	foreach ($items as $item) {
@@ -40,23 +40,23 @@ if (is_array($items) || $items instanceof ElggBatch) {
 			$type = $item->getType();
 			$subtype = $item->getSubType();
 
-			$id = implode('-', array('elgg', $type, $guid));
+			$id = implode('-', ['elgg', $type, $guid]);
 
-			$item_classes[] = implode('-', array('elgg', 'item', $type));
+			$item_classes[] = implode('-', ['elgg', 'item', $type]);
 			if ($subtype) {
-				$item_classes[] = implode('-', array('elgg', 'item', $type, $subtype));
+				$item_classes[] = implode('-', ['elgg', 'item', $type, $subtype]);
 			}
-		} else if (is_callable(array($item, 'getType'))) {
+		} else if (is_callable([$item, 'getType'])) {
 			$id = "item-{$item->getType()}-{$item->id}";
 		}
 
-		$list_items[] = elgg_format_element('li', array(
+		$list_items[] = elgg_format_element('li', [
 			'id' => $id,
 			'class' => implode(' ', $item_classes),
-				), $item_view);
+		], $item_view);
 	}
 }
 
-echo elgg_format_element('ul', array(
+echo elgg_format_element('ul', [
 	'class' => implode(' ', $list_class),
-		), implode('', $list_items));
+], implode('', $list_items));
