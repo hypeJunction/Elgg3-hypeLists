@@ -21,9 +21,9 @@ class MemberCount implements SorterInterface {
 	public static function build($direction = null) {
 
 		$sorter = function (QueryBuilder $qb, $from_alias = 'e') use ($direction) {
-			$qb->joinRelationshipTable($from_alias, 'guid', 'member', true, 'left', 'member_count');
-			$qb->addSelect('COUNT(member_count.guid_two) AS member_count');
-			$qb->addGroupBy('e.guid');
+			$qb->joinRelationshipTable($from_alias, 'guid', 'member', false, 'left', 'member');
+			$qb->addSelect('COUNT(DISTINCT(member.id)) AS member_count');
+			$qb->addGroupBy('member.guid_two');
 			$qb->orderBy('member_count', $direction);
 		};
 
