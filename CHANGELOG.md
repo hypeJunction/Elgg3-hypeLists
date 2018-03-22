@@ -1,3 +1,13 @@
+<a name="5.0.1"></a>
+## [5.0.1](https://github.com/hypeJunctionPro/Elgg3-hypeLists/compare/5.0.0...5.0.1) (2018-03-22)
+
+
+### Bug Fixes
+
+* **sorter:** sorting by member count now works as expected ([88f1aee](https://github.com/hypeJunctionPro/Elgg3-hypeLists/commit/88f1aee))
+
+
+
 <a name="5.0.0"></a>
 # [5.0.0](https://github.com/hypeJunctionPro/Elgg3-hypeLists/compare/4.1.6...5.0.0) (2018-03-19)
 
