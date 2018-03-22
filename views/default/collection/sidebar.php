@@ -17,12 +17,22 @@ if ($filter) {
 if (in_array($collection->getCollectionType(), ['all', 'owner', 'group'])) {
 	$entity = $collection->getTarget();
 
-	echo elgg_view('page/elements/comments_block', [
-		'types' => $collection->getType(),
-		'subtypes' => $collection->getSubtypes(),
-		'container_guid' => $entity ? $entity->guid : null,
-	]);
+	$type = $collection->getType();
+	$subtypes = $collection->getSubtypes();
+	foreach ($subtypes as $key => $subtype) {
+		if (!elgg_trigger_plugin_hook('uses:comments', "$type:$subtype", null, true)) {
+			unset($subtypes[$key]);
+		}
+	}
 
+	if (!empty($subtypes)) {
+		echo elgg_view('page/elements/comments_block', [
+			'types' => $type,
+			'subtypes' => $subtypes,
+			'container_guid' => $entity ? $entity->guid : null,
+		]);
+	}
+	
 	echo elgg_view('page/elements/tagcloud_block', [
 		'types' => $collection->getType(),
 		'subtypes' => $collection->getSubtypes(),
