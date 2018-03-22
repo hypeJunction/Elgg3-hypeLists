@@ -3,15 +3,10 @@
 namespace hypeJunction\Lists;
 
 use ElggEntity;
-use hypeJunction\Data\CollectionAdapter;
+use hypeJunction\Data\CollectionItemAdapter;
 use hypeJunction\Lists\SearchFields\RelationshipToViewer;
 use hypeJunction\Lists\SearchFields\SearchKeyword;
 use hypeJunction\Lists\SearchFields\Sort;
-use hypeJunction\Lists\Sorters\Alpha;
-use hypeJunction\Lists\Sorters\LastAction;
-use hypeJunction\Lists\Sorters\LikesCount;
-use hypeJunction\Lists\Sorters\ResponsesCount;
-use hypeJunction\Lists\Sorters\TimeCreated;
 
 abstract class Collection implements CollectionInterface {
 
@@ -195,11 +190,70 @@ abstract class Collection implements CollectionInterface {
 	 */
 	final public function export() {
 
-		$list = $this->getList();
-		$options = $list->getOptions()->getArrayCopy();
+		$viewtype = elgg_get_viewtype();
+		elgg_set_viewtype('default');
 
-		$adapter = new CollectionAdapter($options);
-		$data = $adapter->export($this->params);
+		$list = $this->getList();
+
+		$limit = $list->getOptions()->limit;
+		$offset = $list->getOptions()->offset;
+
+		$batch = $list->batch($limit, $offset);
+
+		$data = [
+			'count' => (int) $batch->count(),
+			'limit' => (int) $limit,
+			'offset' => (int) $offset,
+			'items' => [],
+			'_related' => [],
+		];
+
+		foreach ($batch as $entity) {
+			$adapter = new CollectionItemAdapter($entity);
+			$data['items'][] = $adapter->export($this->params);
+
+			if ($owner = $entity->getOwnerEntity()) {
+				if (!isset($data['_related'][$owner->guid])) {
+					$adapter = new CollectionItemAdapter($owner);
+					$data['_related'][$owner->guid] = $adapter->export($this->params);
+				}
+			}
+
+			if ($container = $entity->getContainerEntity()) {
+				if (!isset($data['_related'][$container->guid])) {
+					$adapter = new CollectionItemAdapter($container);
+					$data['_related'][$container->guid] = $adapter->export($this->params);
+				}
+			}
+		}
+
+		$data['_related'] = array_values($data['_related']);
+
+		$url = current_page_url();
+		$url = substr($url, strlen(elgg_get_site_url()));
+		if ($data['count'] && $offset > 0) {
+			$prev_offset = $offset - $limit;
+			if ($prev_offset < 0) {
+				$prev_offset = 0;
+			}
+
+			$data['_links']['prev'] = elgg_http_add_url_query_elements($url, [
+				'offset' => $prev_offset,
+			]);
+		} else {
+			$data['_links']['prev'] = false;
+		}
+
+		if ($data['count'] > $limit + $offset) {
+			$next_offset = $offset + $limit;
+			$data['_links']['next'] = elgg_http_add_url_query_elements($url, [
+				'offset' => $next_offset,
+			]);
+		} else {
+			$data['_links']['next'] = false;
+		}
+
+		elgg_set_viewtype($viewtype);
 
 		return $data;
 	}

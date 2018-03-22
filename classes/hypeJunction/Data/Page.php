@@ -68,18 +68,12 @@ class Page {
 		$contexts = (array) elgg_extract('context_stack', $context);
 		$input = (array) elgg_extract('input', $context, []);
 		$signature = elgg_extract('mac', $context);
-		$ts = elgg_extract('ts', $context);
-		$token = elgg_extract('token', $context);
 
 		$data = serialize([$logged_in_user_guid, $page_owner_guid, $contexts, $input]);
 		$mac = elgg_build_hmac($data);
 
 		if (!$mac->matchesToken($signature)) {
 			throw new \InvalidParameterException("Request signature is invalid");
-		}
-
-		if (!validate_action_token(false, $token, $ts)) {
-			throw new \InvalidParameterException("Request token is invalid");
 		}
 
 		elgg_set_context_stack($contexts);

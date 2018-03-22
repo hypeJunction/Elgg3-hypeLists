@@ -31,10 +31,16 @@ if (is_array($metadata)) {
 	}
 }
 
-$options['query'] = get_input('query');
-$options['sort'] = get_input('sort');
+$options = array_merge($vars, $options);
 
-$adapter = new \hypeJunction\Data\CollectionAdapter($options);
-$data = $adapter->export();
+$collection = new \hypeJunction\Lists\DefaultEntityCollection(null, $options);
+
+$fields = $collection->getSearchFields();
+foreach ($fields as $field) {
+	$field->setConstraints();
+}
+
+$data = $collection->export();
+
 
 echo json_encode($data);

@@ -41,7 +41,7 @@ class DataController {
 
 			Page::restoreContext();
 
-			$json = elgg_view_resource("data/$resource");
+			$json = elgg_view_resource("data/$resource", $request->getParams());
 			if (!$json) {
 				$json = json_encode(new \stdClass());
 			}

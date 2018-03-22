@@ -4,11 +4,19 @@ $entity = \hypeJunction\Data\DataController::getEntity();
 
 $options = [
 	'types' => 'object',
-	'subtypes' => $entity->getSubtype() == 'discussion' ? 'discussion_reply' : 'comment',
+	'subtypes' => 'comment',
 	'container_guids' => $entity->guid,
 ];
 
-$adapter = new \hypeJunction\Data\CollectionAdapter($options);
-$data = $adapter->export();
+$options = array_merge($vars, $options);
+
+$collection = new \hypeJunction\Lists\DefaultEntityCollection($entity, $options);
+
+$fields = $collection->getSearchFields();
+foreach ($fields as $field) {
+	$field->setConstraints();
+}
+
+$data = $collection->export();
 
 echo json_encode($data);

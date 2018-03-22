@@ -222,5 +222,7 @@ return function () {
 			'addObjectData'
 		]);
 
+		elgg_register_collection('collection:default', \hypeJunction\Lists\DefaultEntityCollection::class);
+
 	});
 };
