@@ -1,3 +1,13 @@
+<a name="5.0.2"></a>
+## [5.0.2](https://github.com/hypeJunctionPro/Elgg3-hypeLists/compare/5.0.1...5.0.2) (2018-03-22)
+
+
+### Bug Fixes
+
+* **data:** data export endpoints now work as expected ([4f3096c](https://github.com/hypeJunctionPro/Elgg3-hypeLists/commit/4f3096c))
+
+
+
 <a name="5.0.1"></a>
 ## [5.0.1](https://github.com/hypeJunctionPro/Elgg3-hypeLists/compare/5.0.0...5.0.1) (2018-03-22)
 
