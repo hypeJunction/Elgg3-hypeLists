@@ -32,7 +32,7 @@ if (in_array($collection->getCollectionType(), ['all', 'owner', 'group'])) {
 			'container_guid' => $entity ? $entity->guid : null,
 		]);
 	}
-	
+
 	echo elgg_view('page/elements/tagcloud_block', [
 		'types' => $collection->getType(),
 		'subtypes' => $collection->getSubtypes(),

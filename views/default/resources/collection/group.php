@@ -1,4 +1,4 @@
--<?php
+<?php
 
 $request = elgg_extract('request', $vars);
 /* @var $request \Elgg\Request */
