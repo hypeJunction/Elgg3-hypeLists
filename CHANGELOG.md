@@ -1,3 +1,13 @@
+<a name="5.0.3"></a>
+## [5.0.3](https://github.com/hypeJunctionPro/Elgg3-hypeLists/compare/5.0.2...5.0.3) (2018-03-23)
+
+
+### Bug Fixes
+
+* **sidebar:** only show comments block if entities use comments ([be9e946](https://github.com/hypeJunctionPro/Elgg3-hypeLists/commit/be9e946))
+
+
+
 <a name="5.0.2"></a>
 ## [5.0.2](https://github.com/hypeJunctionPro/Elgg3-hypeLists/compare/5.0.1...5.0.2) (2018-03-22)
 
