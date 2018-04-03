@@ -1,3 +1,13 @@
+<a name="5.0.4"></a>
+## [5.0.4](https://github.com/hypeJunctionPro/Elgg3-hypeLists/compare/5.0.3...5.0.4) (2018-04-03)
+
+
+### Bug Fixes
+
+* **css:** search form no longer overflows sidebar ([f9dd1e6](https://github.com/hypeJunctionPro/Elgg3-hypeLists/commit/f9dd1e6))
+
+
+
 <a name="5.0.3"></a>
 ## [5.0.3](https://github.com/hypeJunctionPro/Elgg3-hypeLists/compare/5.0.2...5.0.3) (2018-03-23)
 
