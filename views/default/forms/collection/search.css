@@ -26,11 +26,16 @@
 	padding: 0.25rem;
 }
 
+.elgg-form-collection-search fieldset {
+	min-width: 0;
+}
+
 .elgg-form-collection-search .elgg-field {
-	margin: 0;
-	max-width: 100%;
-	overflow: hidden;
-	display: grid;
+	margin: 0.5rem;
+	width: 100%;
+	width: -moz-available;
+	width: -webkit-fill-available;
+	width: fill-available;
 }
 
 .elgg-form-collection-search input[type="text"],
