@@ -28,6 +28,9 @@
 
 .elgg-form-collection-search .elgg-field {
 	margin: 0;
+	max-width: 100%;
+	overflow: hidden;
+	display: grid;
 }
 
 .elgg-form-collection-search input[type="text"],
