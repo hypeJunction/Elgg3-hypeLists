@@ -19,18 +19,21 @@ $fields = array_map(function(\hypeJunction\Lists\SearchFieldInterface $e) {
 
 $fields = array_filter($fields);
 
-echo elgg_view_field([
-	'#type' => 'fieldset',
-	'class' => 'elgg-sortable-list-fieldset',
-	'fields' => $fields,
-]);
+$output = '';
+foreach ($fields as $field) {
+	$output .= elgg_view_field($field);
+}
+
+echo elgg_format_element('div', [
+	'class' => 'elgg-grid post-form',
+], $output);
 
 $list_options = $collection->getListOptions();
 
 echo elgg_view_field([
 	'#type' => 'hidden',
 	'name' => 'list_type',
-	'value' => elgg_extract('list_type', $options),
+	'value' => elgg_extract('list_type', $list_options),
 ]);
 
 $footer = elgg_view_field([

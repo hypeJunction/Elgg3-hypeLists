@@ -1,15 +1,3 @@
-.elgg-sortable-list-fieldset {
-	display: flex;
-	flex-wrap: wrap;
-	margin: 0;
-}
-
-.elgg-sortable-list-fieldset > .elgg-field {
-	margin: 0;
-	flex: 1 1 auto;
-	padding: 0.25rem;
-}
-
 .elgg-sortable-list-form-toggle {
 	display: inline-block;
 	width: 100%;
@@ -23,7 +11,8 @@
 
 .elgg-form-collection-search .elgg-form-footer {
 	text-align: right;
-	padding: 0.25rem;
+	margin-top: 0.5rem;
+	padding: 0;
 }
 
 .elgg-form-collection-search fieldset {
@@ -31,11 +20,18 @@
 }
 
 .elgg-form-collection-search .elgg-field {
-	margin: 0.5rem;
 	width: 100%;
 	width: -moz-available;
 	width: -webkit-fill-available;
 	width: fill-available;
+}
+
+.elgg-form-collection-search .elgg-field + .elgg-field {
+	margin-top: 0.5rem;
+}
+
+.elgg-form-collection-search .elgg-grid {
+	margin: 0;
 }
 
 .elgg-form-collection-search input[type="text"],
