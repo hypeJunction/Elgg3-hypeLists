@@ -1,3 +1,13 @@
+<a name="5.0.6"></a>
+## [5.0.6](https://github.com/hypeJunctionPro/Elgg3-hypeLists/compare/5.0.5...5.0.6) (2018-04-06)
+
+
+### Bug Fixes
+
+* **search:** use core styles for the search form ([262bbb9](https://github.com/hypeJunctionPro/Elgg3-hypeLists/commit/262bbb9))
+
+
+
 <a name="5.0.5"></a>
 ## [5.0.5](https://github.com/hypeJunctionPro/Elgg3-hypeLists/compare/5.0.4...5.0.5) (2018-04-03)
 
