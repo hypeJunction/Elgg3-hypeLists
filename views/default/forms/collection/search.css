@@ -20,6 +20,7 @@
 }
 
 .elgg-form-collection-search .elgg-field {
+	margin: 0;
 	width: 100%;
 	width: -moz-available;
 	width: -webkit-fill-available;
