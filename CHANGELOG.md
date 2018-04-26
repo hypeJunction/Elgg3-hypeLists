@@ -1,3 +1,13 @@
+<a name="5.0.8"></a>
+## [5.0.8](https://github.com/hypeJunctionPro/Elgg3-hypeLists/compare/5.0.7...5.0.8) (2018-04-26)
+
+
+### Bug Fixes
+
+* **js:** use elgg/Ajax module for ajax calls ([c1ca719](https://github.com/hypeJunctionPro/Elgg3-hypeLists/commit/c1ca719))
+
+
+
 <a name="5.0.7"></a>
 ## [5.0.7](https://github.com/hypeJunctionPro/Elgg3-hypeLists/compare/5.0.6...5.0.7) (2018-04-19)
 
