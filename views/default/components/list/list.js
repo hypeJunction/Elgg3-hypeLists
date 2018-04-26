@@ -3,6 +3,7 @@ define(function (require) {
 	var elgg = require('elgg');
 	var $ = require('jquery');
 	var spinner = require('elgg/spinner');
+	var Ajax = require('elgg/Ajax');
 
 	/**
 	 * List constructor
@@ -229,13 +230,13 @@ define(function (require) {
 		},
 		getPageOffset: function (pageIndex) {
 			var self = this,
-					offset = 0;
+				offset = 0;
 			offset = (pageIndex - 1) * self.options.limit + self.options.listOffset;
 			return (offset < 0) ? 0 : offset;
 		},
 		getPageLimit: function (pageIndex) {
 			var self = this,
-					limit = self.options.limit;
+				limit = self.options.limit;
 			if (pageIndex === 1) {
 				return self.options.limit + self.options.listOffset;
 			}
@@ -252,8 +253,8 @@ define(function (require) {
 
 			var self = this;
 			var parts = self.options.baseUrlParts,
-					args = {},
-					base = '';
+				args = {},
+				base = '';
 
 			if (typeof parts.host === 'undefined') {
 				if (self.options.baseUrl.indexOf('?') === 0) {
@@ -282,9 +283,9 @@ define(function (require) {
 		 */
 		loadPage: function (pageIndex, before, complete) {
 			var self = this,
-					before = before,
-					complete = complete,
-					pageIndex = pageIndex;
+				before = before,
+				complete = complete,
+				pageIndex = pageIndex;
 
 			if (self.options.loadedPages.indexOf(pageIndex) >= 0) {
 				if (typeof complete === 'function') {
@@ -292,7 +293,9 @@ define(function (require) {
 				}
 			} else {
 				if (!self.options.loadingPages[pageIndex]) {
-					self.options.loadingPages[pageIndex] = elgg.post(self.getPageHref(pageIndex), {
+					var ajax = new Ajax(false);
+
+					self.options.loadingPages[pageIndex] = ajax.path(self.getPageHref(pageIndex), {
 						data: {
 							controller: 'loadPage',
 							page_index: pageIndex,
@@ -303,6 +306,7 @@ define(function (require) {
 						dataType: 'html'
 					});
 				}
+
 				self.options.loadingPages[pageIndex].then(function (data) {
 					self.options.loadingPages[pageIndex] = null;
 					self.addPageOnLoad.apply(self, [pageIndex, data]);
@@ -375,8 +379,8 @@ define(function (require) {
 		 */
 		fetchNewItems: function (pageIndex, goToPage) {
 			var self = this,
-					pageIndex = pageIndex,
-					goToPage = goToPage;
+				pageIndex = pageIndex,
+				goToPage = goToPage;
 
 			if (!pageIndex) {
 				if (self.options.reversed) {
@@ -417,7 +421,7 @@ define(function (require) {
 		},
 		addFetchedItems: function (responseData, pageIndex, goToPage) {
 			var self = this,
-					pageIndex = pageIndex;
+				pageIndex = pageIndex;
 
 			if (!pageIndex) {
 				if (self.options.reversed) {
@@ -438,9 +442,9 @@ define(function (require) {
 				}
 			} else {
 				var baseIndex = self.getPageOffset(pageIndex),
-						$pageItems = self.filterPageItems(pageIndex),
-						$firstPageItem = $pageItems.first(),
-						itemIndex = 0;
+					$pageItems = self.filterPageItems(pageIndex),
+					$firstPageItem = $pageItems.first(),
+					itemIndex = 0;
 				// these go in the beginning of the list
 				$newItems.each(function (itIndex) {
 					itemIndex = baseIndex + itIndex;
@@ -496,8 +500,8 @@ define(function (require) {
 		 */
 		parseNewItems: function (responseData) {
 			var self = this,
-					$data = $(responseData),
-					$list;
+				$data = $(responseData),
+				$list;
 
 			if ($data.is('.elgg-list,.elgg-gallery')) {
 				$list = $data;
@@ -520,8 +524,8 @@ define(function (require) {
 		 */
 		lazyLoad: function () {
 			var self = this,
-					lazy = [],
-					delta = 5;
+				lazy = [],
+				delta = 5;
 
 			if (self.options.lazyLoad > 0) {
 				delta = Math.ceil(self.options.lazyLoad / 2);
@@ -581,9 +585,9 @@ define(function (require) {
 		 */
 		addPageItems: function (pageIndex, $items) {
 			var self = this,
-					offset = self.filterPageItems(pageIndex).length, // offset index by the number of items already present on page
-					baseIndex = self.getPageOffset(pageIndex), // item index in relation to all pages
-					itemIndex = 0;
+				offset = self.filterPageItems(pageIndex).length, // offset index by the number of items already present on page
+				baseIndex = self.getPageOffset(pageIndex), // item index in relation to all pages
+				itemIndex = 0;
 
 			if ($items.length) {
 				$items.each(function (itIndex) {
@@ -622,9 +626,9 @@ define(function (require) {
 		 */
 		sortList: function () {
 			var self = this,
-					$children = self.$list.children(),
-					length = $children.length,
-					map = [];
+				$children = self.$list.children(),
+				length = $children.length,
+				map = [];
 
 			for (var i = 0; i < length; i++) {
 				map.push({
@@ -658,24 +662,14 @@ define(function (require) {
 				}
 			}
 			var $elem = $(this),
-					$list = $elem.closest('.elgg-list,.elgg-gallery'),
-					$item = $elem.closest($elem.closest('.elgg-list,.elgg-gallery').children()),
-					href = $elem.attr('href');
+				$list = $elem.closest('.elgg-list,.elgg-gallery'),
+				$item = $elem.closest($elem.closest('.elgg-list,.elgg-gallery').children()),
+				href = $elem.attr('href');
 
 			if (href) {
-				elgg.action($elem.attr('href'), {
-					dataType: 'json',
-					beforeSend: function () {
-						$list.trigger('showLoader');
-					},
-					complete: function () {
-						$list.trigger('hideLoader');
-					},
-					success: function (response) {
-						if (response.status >= 0) {
-							$list.hypeList('removeItems', $item);
-						}
-					}
+				var ajax = new Ajax();
+				ajax.action($elem.attr('href')).done(function (response) {
+					$list.hypeList('removeItems', $item);
 				});
 			} else {
 				$elem.closest('.elgg-list,.elgg-gallery').hypeList('removeItems', $item);
