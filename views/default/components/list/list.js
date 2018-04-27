@@ -225,7 +225,9 @@ define(function (require) {
 		scrollToTop: function (event, pageIndex, $items) {
 			var self = this;
 			if ($items && $items.length) {
-				$('body').animate({scrollTop: $items.first().offset().top + self.options.scrollTopOffset}, 500);
+				$('html, body').animate({
+					scrollTop: $items.first().offset().top + self.options.scrollTopOffset
+				}, 500);
 			}
 		},
 		getPageOffset: function (pageIndex) {

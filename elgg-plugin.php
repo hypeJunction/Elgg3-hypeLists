@@ -26,4 +26,8 @@ return [
 			],
 		],
 	],
+
+	'settings' => [
+		'pagination_type' => null,
+	],
 ];
