@@ -1,3 +1,13 @@
+<a name="5.0.9"></a>
+## [5.0.9](https://github.com/hypeJunctionPro/Elgg3-hypeLists/compare/5.0.8...5.0.9) (2018-04-27)
+
+
+### Bug Fixes
+
+* **js:** correctly scroll to top of the list on pagination ([710bb02](https://github.com/hypeJunctionPro/Elgg3-hypeLists/commit/710bb02))
+
+
+
 <a name="5.0.8"></a>
 ## [5.0.8](https://github.com/hypeJunctionPro/Elgg3-hypeLists/compare/5.0.7...5.0.8) (2018-04-26)
 
