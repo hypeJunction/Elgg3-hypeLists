@@ -293,7 +293,7 @@ abstract class Collection implements CollectionInterface {
 
 		foreach ($classes as $class) {
 			if (!is_subclass_of($class, SearchFieldInterface::class)) {
-				throw new \InvalidParameterException($class . ' must implement ' . SearchFieldInterface::class);
+				throw new \InvalidArgumentException($class . ' must implement ' . SearchFieldInterface::class);
 			}
 
 			/* @var $class \hypeJunction\Lists\SearchFieldInterface */

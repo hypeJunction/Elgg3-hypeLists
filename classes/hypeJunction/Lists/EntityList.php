@@ -15,7 +15,7 @@ class EntityList extends Entities {
 	public function addSort($class, $direction = null) {
 
 		if (!is_subclass_of($class, SorterInterface::class)) {
-			throw new \InvalidParameterException($class . ' must implement ' . SorterInterface::class);
+			throw new \InvalidArgumentException($class . ' must implement ' . SorterInterface::class);
 		}
 
 		/* @var $class SorterInterface */
@@ -75,7 +75,7 @@ class EntityList extends Entities {
 	 */
 	public function addFilter($class, ElggEntity $target = null, array $params = []) {
 		if (!is_subclass_of($class, FilterInterface::class)) {
-			throw new \InvalidParameterException($class . ' must implement ' . FilterInterface::class);
+			throw new \InvalidArgumentException($class . ' must implement ' . FilterInterface::class);
 		}
 
 		/* @var $class FilterInterface */

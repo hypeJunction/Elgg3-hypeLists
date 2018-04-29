@@ -2,6 +2,8 @@
 
 namespace hypeJunction\Lists\SearchFields;
 
+use hypeJunction\Lists\FilterInterface;
+
 class Sort extends SearchField {
 
 	/**
@@ -22,7 +24,12 @@ class Sort extends SearchField {
 		}
 
 		$sort_options_values = [];
-		foreach ($sort_options as $id =>$class) {
+		foreach ($sort_options as $class) {
+			if (!is_subclass_of($class, FilterInterface::class)) {
+				throw new \InvalidArgumentException($class . ' must implement ' . FilterInterface::class);
+			}
+
+			$id = $class::id();
 			foreach (['asc', 'desc'] as $direction) {
 				$sort_options_values["$id::$direction"] = elgg_echo("sort:{$this->collection->getType()}:{$id}::{$direction}");
 			}

@@ -89,13 +89,13 @@ class DefaultEntityCollection extends Collection {
 	 */
 	public function getSortOptions() {
 		return [
-			Alpha::id() => Alpha::class,
-			TimeCreated::id() => TimeCreated::class,
-			LastAction::id() => LastAction::class,
-			LikesCount::id() => LikesCount::class,
-			FriendCount::id() => FriendCount::class,
-			MemberCount::id() => MemberCount::class,
-			ResponsesCount::id() => ResponsesCount::class,
+			Alpha::class,
+			TimeCreated::class,
+			LastAction::class,
+			LikesCount::class,
+			FriendCount::class,
+			MemberCount::class,
+			ResponsesCount::class,
 		];
 	}
 
