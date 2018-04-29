@@ -20,12 +20,14 @@ class IsOwnedBy implements FilterInterface {
 	 */
 	public static function build(\ElggEntity $target = null, array $params = []) {
 
-		if (!isset($target)) {
-			return null;
+		$targets = elgg_extract('guids', $params, []);
+
+		if (empty($targets)) {
+			$targets[] = $target;
 		}
 
-		$filter = function (QueryBuilder $qb, $from_alias = 'e') use ($target) {
-			return $qb->compare("$from_alias.owner_guid", '=', $target, ELGG_VALUE_GUID);
+		$filter = function (QueryBuilder $qb, $from_alias = 'e') use ($targets) {
+			return $qb->compare("$from_alias.owner_guid", '=', $targets, ELGG_VALUE_GUID);
 		};
 
 		return new WhereClause($filter);

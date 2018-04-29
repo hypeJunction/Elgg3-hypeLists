@@ -45,6 +45,7 @@ return [
 	'sort:object:filter:is_owned_by_friends_of' => '%s\'s Friends',
 	'sort:object:filter:label' => 'Posted by',
 	'sort:object:filter:placeholder' => 'Select filter ...',
+	'sort:object:filter:placeholder:guids' => '... or choose users',
 	'sort:object:filter:is_owned_by' => '%s',
 	'sort:object:filter:is_contained_by_users_groups' => 'Members in %s\'s groups',
 	'sort:object:responses_count::asc' => 'Least responses first',

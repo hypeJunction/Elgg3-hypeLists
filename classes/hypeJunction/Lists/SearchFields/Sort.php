@@ -3,6 +3,7 @@
 namespace hypeJunction\Lists\SearchFields;
 
 use hypeJunction\Lists\FilterInterface;
+use hypeJunction\Lists\SorterInterface;
 
 class Sort extends SearchField {
 
@@ -25,7 +26,7 @@ class Sort extends SearchField {
 
 		$sort_options_values = [];
 		foreach ($sort_options as $class) {
-			if (!is_subclass_of($class, FilterInterface::class)) {
+			if (!is_subclass_of($class, SorterInterface::class)) {
 				throw new \InvalidArgumentException($class . ' must implement ' . FilterInterface::class);
 			}
 
@@ -71,11 +72,18 @@ class Sort extends SearchField {
 
 		$sorts = $this->collection->getSortOptions();
 
-		$class = $sorts[$field];
+		$class = false;
 
-		if ($class) {
-			$this->collection->addSort($class, $direction);
+		foreach ($sorts as $sort) {
+			if (!is_subclass_of($sort, SorterInterface::class)) {
+				continue;
+			}
+
+			$id = $sort::id();
+
+			if ($id === $field) {
+				$this->collection->addSort($sort, $direction);
+			}
 		}
-
 	}
 }
