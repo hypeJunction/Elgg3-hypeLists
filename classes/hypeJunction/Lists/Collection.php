@@ -102,7 +102,7 @@ abstract class Collection implements CollectionInterface {
 		}
 
 		$list->setSearchQuery($this->query);
-		
+
 		return $list;
 	}
 

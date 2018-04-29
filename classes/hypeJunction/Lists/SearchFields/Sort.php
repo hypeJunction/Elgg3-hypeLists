@@ -27,7 +27,7 @@ class Sort extends SearchField {
 		$sort_options_values = [];
 		foreach ($sort_options as $class) {
 			if (!is_subclass_of($class, SorterInterface::class)) {
-				throw new \InvalidArgumentException($class . ' must implement ' . FilterInterface::class);
+				throw new \InvalidArgumentException($class . ' must implement ' . SorterInterface::class);
 			}
 
 			$id = $class::id();
