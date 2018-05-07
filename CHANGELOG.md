@@ -1,3 +1,19 @@
+<a name="5.0.10"></a>
+## [5.0.10](https://github.com/hypeJunctionPro/Elgg3-hypeLists/compare/5.0.9...5.0.10) (2018-05-07)
+
+
+### Bug Fixes
+
+* **sorts:** correctly validate type ([52ccd52](https://github.com/hypeJunctionPro/Elgg3-hypeLists/commit/52ccd52))
+* **sorts:** simplify sorting registration ([e00d199](https://github.com/hypeJunctionPro/Elgg3-hypeLists/commit/e00d199))
+
+
+### Features
+
+* **filters:** add option to search by post owner ([b3e231f](https://github.com/hypeJunctionPro/Elgg3-hypeLists/commit/b3e231f))
+
+
+
 <a name="5.0.9"></a>
 ## [5.0.9](https://github.com/hypeJunctionPro/Elgg3-hypeLists/compare/5.0.8...5.0.9) (2018-04-27)
 
