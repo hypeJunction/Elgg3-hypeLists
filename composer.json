@@ -7,7 +7,7 @@
 	"keywords": [
 		"elgg", "plugin", "hypejunction", "hypelist", "lists", "ajax"
 	],
-	"license": "GPL-2.0",
+	"license": "proprietary",
 	"authors": [{
 			"name": "Ismayil Khayredinov",
 			"email": "info@hypejunction.com"

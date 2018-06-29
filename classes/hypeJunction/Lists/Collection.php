@@ -7,6 +7,7 @@ use hypeJunction\Data\CollectionItemAdapter;
 use hypeJunction\Lists\SearchFields\RelationshipToViewer;
 use hypeJunction\Lists\SearchFields\SearchKeyword;
 use hypeJunction\Lists\SearchFields\Sort;
+use Psr\Log\LogLevel;
 
 abstract class Collection implements CollectionInterface {
 
@@ -165,13 +166,15 @@ abstract class Collection implements CollectionInterface {
 
 		$list = $this->getList();
 
-		$limit = $list->getOptions()->limit;
-		$offset = $list->getOptions()->offset;
+		if (!isset($vars['limit'])) {
+			$vars['limit'] = $list->getOptions()->limit;
+		}
 
-		$vars['limit'] = $limit;
-		$vars['offset'] = $offset;
+		if (!isset($vars['offset'])) {
+			$vars['offset'] = $list->getOptions()->offset;
+		}
 
-		$vars['items'] = $list->get($limit, $offset);
+		$vars['items'] = $list->get($vars['limit'], $vars['offset']);
 		$vars['count'] = $list->count();
 
 		$query = _elgg_services()->request->getParams();

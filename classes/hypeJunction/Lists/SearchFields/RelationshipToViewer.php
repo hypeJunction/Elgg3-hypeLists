@@ -41,32 +41,43 @@ class RelationshipToViewer extends SearchField {
 
 		$value = $this->getValue();
 
+		$fields = [
+			[
+				'#type' => 'select',
+				'placeholder' => elgg_echo("sort:{$this->collection->getType()}:filter:placeholder"),
+				'name' => $this->getName() . '[relationship]',
+				'value' => elgg_extract('relationship', $value),
+				'options_values' => $filter_options_values,
+				'config' => [
+					'allowClear' => true,
+				],
+			],
+		];
+
+		if ($this->collection->getType() !== 'user') {
+			$fields[] = [
+				'#type' => 'guids',
+				'options' => [
+					'type' => 'user',
+				],
+				'placeholder' => elgg_echo("sort:object:filter:placeholder:guids"),
+				'name' => $this->getName() . '[guids]',
+				'value' => elgg_extract('guids', $value),
+				'multiple' => true,
+			];
+		}
+
+		if (sizeof($fields) == 1) {
+			$field = $fields[0];
+			$field['#label'] = elgg_echo("sort:{$this->collection->getType()}:filter:label");
+
+			return $field;
+		}
+
 		return [
 			'#type' => 'fieldset',
 			'#label' => elgg_echo("sort:{$this->collection->getType()}:filter:label"),
-			'fields' => [
-				[
-					'#type' => 'select',
-					'placeholder' => elgg_echo("sort:{$this->collection->getType()}:filter:placeholder"),
-					'name' => $this->getName() . '[relationship]',
-					'value' => elgg_extract('relationship', $value),
-					'options_values' => $filter_options_values,
-					'config' => [
-						'allowClear' => true,
-					],
-				],
-				[
-					'#type' => 'guids',
-					'options' => [
-						'type' => 'user',
-					],
-					'placeholder' => elgg_echo("sort:{$this->collection->getType()}:filter:placeholder:guids"),
-					'name' => $this->getName() . '[guids]',
-					'value' => elgg_extract('guids', $value),
-					'multiple' => true,
-				],
-			],
-
+			'fields' => $fields,
 		];
 	}
 
@@ -95,9 +106,10 @@ class RelationshipToViewer extends SearchField {
 		}
 
 		$guids = elgg_extract('guids', $filter);
-
-		$this->collection->addFilter(IsOwnedBy::class, null, [
-			'guids' => $guids,
-		]);
+		if (!empty($guids)) {
+			$this->collection->addFilter(IsOwnedBy::class, null, [
+				'guids' => $guids,
+			]);
+		}
 	}
 }

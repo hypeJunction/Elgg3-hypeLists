@@ -18,7 +18,8 @@ if (in_array($collection->getCollectionType(), ['all', 'owner', 'group'])) {
 	$entity = $collection->getTarget();
 
 	$type = $collection->getType();
-	$subtypes = $collection->getSubtypes();
+	$subtypes = (array) $collection->getSubtypes();
+
 	foreach ($subtypes as $key => $subtype) {
 		if (!elgg_trigger_plugin_hook('uses:comments', "$type:$subtype", null, true)) {
 			unset($subtypes[$key]);
