@@ -1,3 +1,13 @@
+<a name="5.1.1"></a>
+## [5.1.1](https://github.com/hypeJunctionPro/Elgg3-hypeLists/compare/5.1.0...5.1.1) (2018-08-10)
+
+
+### Features
+
+* **search:** add collection API to search field ([d032f8b](https://github.com/hypeJunctionPro/Elgg3-hypeLists/commit/d032f8b))
+
+
+
 <a name="5.1.0"></a>
 # [5.1.0](https://github.com/hypeJunctionPro/Elgg3-hypeLists/compare/5.0.0...5.1.0) (2018-06-29)
 
