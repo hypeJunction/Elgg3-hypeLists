@@ -23,6 +23,11 @@
         <name>hypeCapabilities</name>
     </requires>
 
+    <requires>
+        <type>plugin</type>
+        <name>hypeStash</name>
+    </requires>
+
 	<provides>
 		<type>plugin</type>
 		<name>user_sort</name>

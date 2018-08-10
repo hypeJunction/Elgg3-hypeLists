@@ -29,6 +29,10 @@ class Extender {
 		$type = $entity->type;
 		$subtype = $entity->getSubtype();
 
+		if (elgg_is_admin_logged_in()) {
+			$return['metadata'] = $entity->getAllMetadata();
+		}
+
 		$return['display_name'] = $entity->getDisplayName();
 		$return['time_created'] = $entity->time_created;
 		$return['time_updated'] = $entity->time_updated;
@@ -47,11 +51,25 @@ class Extender {
 		}
 
 		$return['_links']['icons'] = [];
+		$return['_links']['cover'] = [];
 
 		$icon_sizes = array_keys((array) elgg_get_icon_sizes($type, $subtype));
 
 		foreach ($icon_sizes as $icon_size) {
-			$return['_links']['icons'][$icon_size] = $entity->getIconURL($icon_size);
+			$return['_links']['icons'][$icon_size] = $entity->getIconURL([
+				'size' => $icon_size,
+				'use_cookie' => false,
+			]);
+		}
+
+		$cover_sizes = array_keys((array) elgg_get_icon_sizes($type, $subtype, 'cover'));
+
+		foreach ($cover_sizes as $cover_size) {
+			$return['_links']['cover'][$cover_size] = $entity->getIconURL([
+				'size' => $cover_size,
+				'type' => 'cover',
+				'use_cookie' => false,
+			]);
 		}
 
 		$tag_names = elgg_get_registered_tag_metadata_names();
@@ -144,7 +162,7 @@ class Extender {
 			$return[$field] = $entity->$field;
 		}
 
-		$return['_counters']['friends'] = $entity->getFriends(['count' => true]);
+		$return['_counters']['friends'] = elgg_get_total_friends($entity);
 		$return['_links']['friends'] = elgg_http_add_url_query_elements("user/friends", [
 			'guid' => $entity->guid,
 		]);
@@ -192,7 +210,7 @@ class Extender {
 		$return['access']['membership'] = $entity->membership;
 		$return['access']['group_acl'] = $entity->group_acl;
 
-		$return['_counters']['members'] = $entity->getMembers(['count' => true]);
+		$return['_counters']['members'] = elgg_get_total_members($entity);
 		$return['_links']['members'] = elgg_http_add_url_query_elements("group/members", [
 			'guid' => $entity->guid,
 		]);
@@ -232,9 +250,9 @@ class Extender {
 				'display' => 'image',
 				'src' => $entity->getIconURL('large'),
 			];
-
-			return $return;
 		}
+
+		return $return;
 	}
 
 	/**
@@ -256,11 +274,8 @@ class Extender {
 			return;
 		}
 
-		$return['_counters']['comments'] = $entity->countComments();
-
-		if (elgg_is_active_plugin('likes')) {
-			$return['_counters']['likes'] = (int) $entity->countAnnotations('likes');
-		}
+		$return['_counters']['comments'] = elgg_get_total_comments($entity);
+		$return['_counters']['likes'] = elgg_get_total_likes($entity);
 
 		return $return;
 	}
