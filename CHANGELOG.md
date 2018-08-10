@@ -1,3 +1,8 @@
+<a name="5.1.2"></a>
+## [5.1.2](https://github.com/hypeJunctionPro/Elgg3-hypeLists/compare/5.1.1...5.1.2) (2018-08-10)
+
+
+
 <a name="5.1.1"></a>
 ## [5.1.1](https://github.com/hypeJunctionPro/Elgg3-hypeLists/compare/5.1.0...5.1.1) (2018-08-10)
 
