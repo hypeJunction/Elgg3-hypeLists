@@ -1,3 +1,13 @@
+<a name="5.1.3"></a>
+## [5.1.3](https://github.com/hypeJunctionPro/Elgg3-hypeLists/compare/5.1.2...5.1.3) (2018-08-10)
+
+
+### Features
+
+* **export:** fix access data in object export ([f141fb1](https://github.com/hypeJunctionPro/Elgg3-hypeLists/commit/f141fb1))
+
+
+
 <a name="5.1.2"></a>
 ## [5.1.2](https://github.com/hypeJunctionPro/Elgg3-hypeLists/compare/5.1.1...5.1.2) (2018-08-10)
 
