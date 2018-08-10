@@ -33,4 +33,11 @@ abstract class SearchField implements SearchFieldInterface {
 	public function getValue() {
 		return elgg_extract($this->getName(), $this->collection->getParams());
 	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getCollection() {
+		return $this->collection;
+	}
 }

@@ -26,6 +26,7 @@ interface SearchFieldInterface {
 
 	/**
 	 * Returns field parameters
+	 *
 	 * @return array|null
 	 */
 	public function getField();
