@@ -1,6 +1,8 @@
 <?php
 
 return [
+	'bootstrap' => \hypeJunction\Lists\Bootstrap::class,
+
 	'routes' => [
 		'collection:all' => [
 			'path' => '/collection/{type}/{subtype}/all',

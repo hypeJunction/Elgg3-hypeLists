@@ -1,32 +1,22 @@
 <?php
 
 /**
- * hypeLists
- * Developer tools for managing and ajaxifying collections
- *
- * @author      Ismayil Khayredinov <ismayil@hypejunction.com>
- * @copyright   Copyright (c) 2014-2018 Ismayil Khayredinov
- */
-require_once __DIR__ . '/autoloader.php';
-
-/**
  * Wrap list views into a container that can be manipulated
  *
- * @param string $hook   "view"
- * @param string $type   "page/components/list" or "page/components/gallery"
- * @param string $view   View
- * @param array  $params Hook params
+ * @param \Elgg\Hook $hook Hook object
  *
- * @return string Wrapped view
+ * @return string|void Wrapped view
  */
-function hypelists_wrap_list_view_hook($hook, $type, $view, $params) {
+function hypelists_wrap_list_view_hook(\Elgg\Hook $hook) {
 
-	$viewtype = elgg_extract('viewtype', $params, 'default');
+	$viewtype = $hook->getParam('viewtype', 'default');
 	if ($viewtype !== 'default') {
 		return;
 	}
 
-	$vars = elgg_extract('vars', $params);
+	$type = $hook->getType();
+	$view = $hook->getValue();
+	$vars = $hook->getParam('vars');
 
 	$pagination = elgg_extract('pagination', $vars);
 	$pagination_type = elgg_extract('pagination_type', $vars, elgg_get_plugin_setting('pagination_type', 'hypeLists'));
@@ -100,15 +90,13 @@ function hypelists_wrap_list_view_hook($hook, $type, $view, $params) {
 /**
  * Filters some of the view vars
  *
- * @param string $hook   "view_vars"
- * @param string $type   List view name
- * @param array  $vars   View vars
- * @param array  $params Hook params
+ * @param \Elgg\Hook $hook Hook object
  *
  * @return array
  */
-function hypelists_filter_vars($hook, $type, $vars, $params) {
+function hypelists_filter_vars(\Elgg\Hook $hook) {
 
+	$vars = $hook->getValue();
 	$vars['base_url'] = hypelists_prepare_base_url(elgg_extract('base_url', $vars));
 
 	return $vars;
@@ -180,49 +168,3 @@ function elgg_view_collection($name, ElggEntity $target = null, array $params = 
 
 	return elgg_view('collection/view', $vars);
 }
-
-return function () {
-	elgg_register_event_handler('init', 'system', function () {
-		$defaults = [
-			'page/components/list',
-			'page/components/gallery',
-			'page/components/ajax_list',
-		];
-
-		$views = elgg_trigger_plugin_hook('get_views', 'framework:lists', null, $defaults);
-		foreach ($views as $view) {
-			elgg_register_plugin_hook_handler('view', $view, 'hypelists_wrap_list_view_hook');
-			elgg_register_plugin_hook_handler('view_vars', $view, 'hypelists_filter_vars');
-		}
-
-		elgg_extend_view('elgg.css', 'collection/view.css');
-		elgg_extend_view('elgg.css', 'forms/collection/search.css');
-
-		elgg_register_plugin_hook_handler('adapter:entity', 'all', [\hypeJunction\Data\Extender::class, 'addData']);
-		elgg_register_plugin_hook_handler('adapter:entity', 'all', [
-			\hypeJunction\Data\Extender::class,
-			'addPermissions'
-		]);
-		elgg_register_plugin_hook_handler('adapter:entity', 'all', [\hypeJunction\Data\Extender::class, 'addCounters']);
-		elgg_register_plugin_hook_handler('adapter:entity', 'all', [
-			\hypeJunction\Data\Extender::class,
-			'addDataLinks'
-		]);
-
-		elgg_register_plugin_hook_handler('adapter:entity', 'user', [
-			\hypeJunction\Data\Extender::class,
-			'addUserData'
-		]);
-		elgg_register_plugin_hook_handler('adapter:entity', 'group', [
-			\hypeJunction\Data\Extender::class,
-			'addGroupData'
-		]);
-		elgg_register_plugin_hook_handler('adapter:entity', 'object', [
-			\hypeJunction\Data\Extender::class,
-			'addObjectData'
-		]);
-
-		elgg_register_collection('collection:default', \hypeJunction\Lists\DefaultEntityCollection::class);
-
-	});
-};
