@@ -2,10 +2,10 @@
 
 namespace hypeJunction\Data;
 
-use Elgg\EntityNotFoundException;
-use Elgg\EntityPermissionsException;
+use Elgg\Exceptions\Http\EntityNotFoundException;
+use Elgg\Exceptions\Http\EntityPermissionsException;
 use Elgg\Http\ResponseBuilder;
-use Elgg\HttpException;
+use Elgg\Exceptions\HttpException;
 use Elgg\PageNotFoundException;
 use Elgg\Request;
 use ElggEntity;
