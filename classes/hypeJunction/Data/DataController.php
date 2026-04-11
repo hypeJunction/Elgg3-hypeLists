@@ -6,7 +6,7 @@ use Elgg\Exceptions\Http\EntityNotFoundException;
 use Elgg\Exceptions\Http\EntityPermissionsException;
 use Elgg\Http\ResponseBuilder;
 use Elgg\Exceptions\HttpException;
-use Elgg\PageNotFoundException;
+use Elgg\Exceptions\Http\PageNotFoundException;
 use Elgg\Request;
 use ElggEntity;
 

@@ -11,7 +11,7 @@ if ($username) {
 }
 
 if (!$user) {
-	throw new \Elgg\EntityNotFoundException();
+	throw new \Elgg\Exceptions\Http\EntityNotFoundException();
 }
 
 $collections = elgg()->collections;
@@ -21,7 +21,7 @@ $collection = $collections->build($request->getRoute(), $user, $request->getPara
 /* @var $collection \hypeJunction\Lists\CollectionInterface */
 
 if (!$collection) {
-	throw new \Elgg\PageNotFoundException();
+	throw new \Elgg\Exceptions\Http\PageNotFoundException();
 }
 
 $content = elgg_view('collection/view', [

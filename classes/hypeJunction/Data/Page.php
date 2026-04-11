@@ -57,7 +57,7 @@ class Page {
 	/**
 	 * Prevent unsigned requests to data endpoints
 	 * @return bool
-	 * @throws \InvalidParameterException
+	 * @throws \Elgg\Exceptions\InvalidParameterException
 	 */
 	public static function restoreContext() {
 
@@ -73,7 +73,7 @@ class Page {
 		$mac = elgg_build_hmac($data);
 
 		if (!$mac->matchesToken($signature)) {
-			throw new \InvalidParameterException("Request signature is invalid");
+			throw new \Elgg\Exceptions\InvalidParameterException("Request signature is invalid");
 		}
 
 		elgg_set_context_stack($contexts);

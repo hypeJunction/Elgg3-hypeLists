@@ -15,7 +15,7 @@ $collection = $collections->build($request->getRoute(), $entity, $request->getPa
 /* @var $collection \hypeJunction\Lists\CollectionInterface */
 
 if (!$collection) {
-	throw new \Elgg\PageNotFoundException();
+	throw new \Elgg\Exceptions\Http\PageNotFoundException();
 }
 
 $content = elgg_view('collection/view', [

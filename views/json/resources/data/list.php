@@ -22,7 +22,7 @@ $metadata = get_input('metadata');
 if (is_array($metadata)) {
 	foreach ($metadata as $name => $value) {
 		if (!in_array($name, $public_metadata)) {
-			throw new \Elgg\EntityPermissionsException("'$name' is not public metadata");
+			throw new \Elgg\Exceptions\Http\EntityPermissionsException("'$name' is not public metadata");
 		}
 		$options['metadata_name_value_pairs'][] = [
 			'name' => $name,
