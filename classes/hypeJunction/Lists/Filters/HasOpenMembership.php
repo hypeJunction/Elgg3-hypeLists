@@ -4,7 +4,7 @@ namespace hypeJunction\Lists\Filters;
 
 use Elgg\Database\Clauses\WhereClause;
 use Elgg\Database\QueryBuilder;
-use Elgg\TimeUsing;
+use Elgg\Traits\TimeUsing;
 use hypeJunction\Lists\FilterInterface;
 
 class HasOpenMembership implements FilterInterface {
