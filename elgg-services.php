@@ -1,5 +1,5 @@
 <?php
 
 return [
-	'collections' => \DI\object(\hypeJunction\Lists\Collections::class)
+	'collections' => \DI\create(\hypeJunction\Lists\Collections::class)
 ];
