@@ -1,0 +1,4 @@
+# hypelists has no runtime plugin deps — it's a self-contained query /
+# filter framework. manifest.xml lists hypeCapabilities + hypeStash but
+# those are 3.x-baseline plugins that would fatal on Elgg 4.x bootCore
+# (DI\object() was removed in PHP-DI 6.x) — explicitly NOT mounted.

@@ -10,4 +10,4 @@ robots.txt
 /mod/
 composer.lock
 Gemfile.lock
-yarn.lock
+yarn.locktests/.phpunit.result.cache
