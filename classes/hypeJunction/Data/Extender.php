@@ -3,7 +3,6 @@
 namespace hypeJunction\Data;
 
 use ElggEntity;
-use hypeJunction\Post\Model;
 
 class Extender {
 
