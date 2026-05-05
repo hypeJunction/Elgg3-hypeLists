@@ -9,6 +9,9 @@ use hypeJunction\Lists\SearchFields\SearchKeyword;
 use hypeJunction\Lists\SearchFields\Sort;
 use Psr\Log\LogLevel;
 
+/**
+ * Base class for hypelists collection implementations.
+ */
 abstract class Collection implements CollectionInterface {
 
 	/**
@@ -132,7 +135,7 @@ abstract class Collection implements CollectionInterface {
 	final public function addFilter($class, ElggEntity $target = null, array $params = []) {
 		$this->filters[] = (object) [
 			'class' => $class,
-			'target' => $target ? : elgg_get_logged_in_user_entity(),
+			'target' => $target ?: elgg_get_logged_in_user_entity(),
 			'params' => $params,
 		];
 	}
@@ -215,14 +218,16 @@ abstract class Collection implements CollectionInterface {
 			$adapter = new CollectionItemAdapter($entity);
 			$data['items'][] = $adapter->export($this->params);
 
-			if ($owner = $entity->getOwnerEntity()) {
+			$owner = $entity->getOwnerEntity();
+			if ($owner) {
 				if (!isset($data['_related'][$owner->guid])) {
 					$adapter = new CollectionItemAdapter($owner);
 					$data['_related'][$owner->guid] = $adapter->export($this->params);
 				}
 			}
 
-			if ($container = $entity->getContainerEntity()) {
+			$container = $entity->getContainerEntity();
+			if ($container) {
 				if (!isset($data['_related'][$container->guid])) {
 					$adapter = new CollectionItemAdapter($container);
 					$data['_related'][$container->guid] = $adapter->export($this->params);
@@ -232,7 +237,7 @@ abstract class Collection implements CollectionInterface {
 
 		$data['_related'] = array_values($data['_related']);
 
-		$url = current_page_url();
+		$url = elgg_get_current_url();
 		$url = substr($url, strlen(elgg_get_site_url()));
 		if ($data['count'] && $offset > 0) {
 			$prev_offset = $offset - $limit;
@@ -307,7 +312,7 @@ abstract class Collection implements CollectionInterface {
 		$params = $this->params;
 		$params['collection'] = $this;
 
-		return elgg_trigger_plugin_hook('search:fields', $this->getId(), $params, $fields);
+		return elgg_trigger_event_results('search:fields', $this->getId(), $params, $fields);
 	}
 
 	/**
@@ -323,7 +328,6 @@ abstract class Collection implements CollectionInterface {
 		$menu = [];
 
 		foreach ($subtypes as $subtype) {
-
 			$owner = $target;
 			
 			if (!$owner || ($owner instanceof \ElggUser && $owner->guid != $target->guid)) {

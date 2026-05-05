@@ -10,12 +10,15 @@ use Elgg\Exceptions\Http\PageNotFoundException;
 use Elgg\Request;
 use ElggEntity;
 
+/**
+ * Handles /data/* API routes for the hypelists data adapter.
+ */
 class DataController {
 
 	/**
 	 * Route /data
 	 *
-	 * @param array $segments URL segments
+	 * @param Request $request Elgg request
 	 *
 	 * @return ResponseBuilder
 	 */
@@ -54,7 +57,7 @@ class DataController {
 				'payload' => $payload,
 			];
 		} catch (\Exception $ex) {
-			$status = $ex->getCode() ? : ELGG_HTTP_INTERNAL_SERVER_ERROR;
+			$status = $ex->getCode() ?: ELGG_HTTP_INTERNAL_SERVER_ERROR;
 			$response = [
 				'status' => $status,
 				'message' => $ex->getMessage(),

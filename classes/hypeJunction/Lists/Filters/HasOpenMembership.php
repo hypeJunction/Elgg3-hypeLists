@@ -7,6 +7,7 @@ use Elgg\Database\QueryBuilder;
 use Elgg\Traits\TimeUsing;
 use hypeJunction\Lists\FilterInterface;
 
+/** class */
 class HasOpenMembership implements FilterInterface {
 
 	/**

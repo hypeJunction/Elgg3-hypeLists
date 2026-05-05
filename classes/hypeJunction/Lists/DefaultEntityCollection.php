@@ -11,6 +11,9 @@ use hypeJunction\Lists\Sorters\MemberCount;
 use hypeJunction\Lists\Sorters\ResponsesCount;
 use hypeJunction\Lists\Sorters\TimeCreated;
 
+/**
+ * Default entity collection for the /collection/* routes.
+ */
 class DefaultEntityCollection extends Collection {
 
 	/**
@@ -81,7 +84,7 @@ class DefaultEntityCollection extends Collection {
 	 * @return string
 	 */
 	public function getURL() {
-		return current_page_url();
+		return elgg_get_current_url();
 	}
 
 	/**

@@ -2,6 +2,9 @@
 
 namespace hypeJunction\Data;
 
+/**
+ * Context capture and restoration for /data endpoint requests.
+ */
 class Page {
 
 	/**
@@ -38,7 +41,7 @@ class Page {
 		}
 
 		$contexts = elgg_get_context_stack();
-		$input = (array) elgg_get_config("input");
+		$input = (array) elgg_get_config('input');
 
 		$data = serialize([$logged_in_user_guid, $page_owner_guid, $contexts, $input]);
 		$mac = elgg_build_hmac($data)->getToken();
@@ -73,11 +76,11 @@ class Page {
 		$mac = elgg_build_hmac($data);
 
 		if (!$mac->matchesToken($signature)) {
-			throw new \Elgg\Exceptions\InvalidParameterException("Request signature is invalid");
+			throw new \Elgg\Exceptions\InvalidParameterException('Request signature is invalid');
 		}
 
 		elgg_set_context_stack($contexts);
-		elgg_set_config("input", $input);
+		elgg_set_config('input', $input);
 		elgg_set_page_owner_guid($page_owner_guid);
 
 		return true;

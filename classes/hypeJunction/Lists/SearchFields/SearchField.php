@@ -1,13 +1,11 @@
 <?php
-/**
- *
- */
 
 namespace hypeJunction\Lists\SearchFields;
 
 use hypeJunction\Lists\CollectionInterface;
 use hypeJunction\Lists\SearchFieldInterface;
 
+/** Base class for hypelists search field implementations. */
 abstract class SearchField implements SearchFieldInterface {
 
 	/**

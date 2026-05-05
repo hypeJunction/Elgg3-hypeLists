@@ -4,6 +4,7 @@ namespace hypeJunction\Data;
 
 use ElggEntity;
 
+/** class */
 class Extender {
 
 	/**
@@ -110,7 +111,7 @@ class Extender {
 		$return['_permissions']['edit'] = $entity->canEdit();
 		$return['_permissions']['comment'] = $entity->canComment();
 
-		$registered = get_registered_entity_types();
+		$registered = elgg_get_registered_entity_types();
 
 		foreach ($registered as $type => $subtypes) {
 			if ($subtypes) {
@@ -162,10 +163,10 @@ class Extender {
 		}
 
 		$return['_counters']['friends'] = elgg_get_total_friends($entity);
-		$return['_links']['friends'] = elgg_http_add_url_query_elements("user/friends", [
+		$return['_links']['friends'] = elgg_http_add_url_query_elements('user/friends', [
 			'guid' => $entity->guid,
 		]);
-		$return['_links']['friends_of'] = elgg_http_add_url_query_elements("user/friends_of", [
+		$return['_links']['friends_of'] = elgg_http_add_url_query_elements('user/friends_of', [
 			'guid' => $entity->guid,
 		]);
 
@@ -210,7 +211,7 @@ class Extender {
 		$return['access']['group_acl'] = $entity->group_acl;
 
 		$return['_counters']['members'] = elgg_get_total_members($entity);
-		$return['_links']['members'] = elgg_http_add_url_query_elements("group/members", [
+		$return['_links']['members'] = elgg_http_add_url_query_elements('group/members', [
 			'guid' => $entity->guid,
 		]);
 
@@ -301,7 +302,7 @@ class Extender {
 		$subtype = $entity->getSubtype();
 
 		if ($entity->owner_guid) {
-			$return['_links']['owner'] = elgg_http_add_url_query_elements("data/entity", [
+			$return['_links']['owner'] = elgg_http_add_url_query_elements('data/entity', [
 				'guid' => $entity->owner_guid,
 			]);
 		} else {
@@ -309,21 +310,21 @@ class Extender {
 		}
 
 		if ($entity->container_guid) {
-			$return['_links']['container'] = elgg_http_add_url_query_elements("data/entity", [
+			$return['_links']['container'] = elgg_http_add_url_query_elements('data/entity', [
 				'guid' => $entity->container_guid,
 			]);
 		} else {
 			$return['_links']['container'] = false;
 		}
 
-		$return['_links']['comments'] = elgg_http_add_url_query_elements("data/comments", [
+		$return['_links']['comments'] = elgg_http_add_url_query_elements('data/comments', [
 			'guid' => $entity->guid,
 		]);
 
 		if (elgg_is_active_plugin('likes')) {
-			$likable = (bool) elgg_trigger_plugin_hook('likes:is_likable', "$type:$subtype", [], false);
+			$likable = (bool) elgg_trigger_event_results('likes:is_likable', "$type:$subtype", [], false);
 			if ($likable) {
-				$return['_links']['likes'] = elgg_http_add_url_query_elements("data/likes", [
+				$return['_links']['likes'] = elgg_http_add_url_query_elements('data/likes', [
 					'guid' => $entity->guid,
 				]);
 			} else {
@@ -337,7 +338,7 @@ class Extender {
 	/**
 	 * Returns entity access info
 	 *
-	 * @param ElggEntity $entity
+	 * @param ElggEntity $entity Entity to describe
 	 *
 	 * @return array
 	 */
@@ -346,14 +347,14 @@ class Extender {
 		$access = $entity->access_id;
 		$icon = function () use ($access) {
 			switch ($access) {
-				case ACCESS_FRIENDS :
+				case ACCESS_FRIENDS:
 					$icon_name = 'user';
 					break;
-				case ACCESS_PUBLIC :
-				case ACCESS_LOGGED_IN :
+				case ACCESS_PUBLIC:
+				case ACCESS_LOGGED_IN:
 					$icon_name = 'globe';
 					break;
-				case ACCESS_PRIVATE :
+				case ACCESS_PRIVATE:
 					$icon_name = 'lock';
 					break;
 				default:

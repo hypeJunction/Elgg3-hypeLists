@@ -2,6 +2,7 @@
 
 namespace hypeJunction\Lists\SearchFields;
 
+/** Search field that adds a keyword query input. */
 class SearchKeyword extends SearchField {
 
 	/**

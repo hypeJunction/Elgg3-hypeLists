@@ -4,6 +4,7 @@ namespace hypeJunction\Lists\SearchFields;
 
 use hypeJunction\Lists\Filters\SubtypeFilter;
 
+/** Search field for filtering by entity subtype. */
 class Subtype extends SearchField {
 
 	/**

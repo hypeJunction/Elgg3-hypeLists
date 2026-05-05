@@ -13,6 +13,7 @@ if ($username) {
 if (!$user) {
 	throw new \Elgg\Exceptions\Http\EntityNotFoundException();
 }
+
 $collections = elgg()->collections;
 /* @var $collections \hypeJunction\Lists\Collections */
 

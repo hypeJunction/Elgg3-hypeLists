@@ -97,6 +97,7 @@ define(function (require) {
 			if (self.options.paginationPosition === 'before' || self.options.paginationPosition === 'both') {
 				self.$list.before($before);
 			}
+
 			if (self.options.paginationPosition === 'after' || self.options.paginationPosition === 'both') {
 				self.$list.after($after);
 			}
@@ -164,9 +165,11 @@ define(function (require) {
 			} else {
 				pageIndex = 1;
 			}
+
 			if (self.options.loadedPages.indexOf(pageIndex) === -1) {
 				return;
 			}
+
 			if (self.timeout) {
 				clearTimeout(self.timeout);
 			}
@@ -209,6 +212,7 @@ define(function (require) {
 				if (self.$noResults) {
 					self.$noResults.hide();
 				}
+
 				$pageItems.removeClass(self.options.classHidden).addClass(self.options.classVisible);
 			}
 
@@ -242,6 +246,7 @@ define(function (require) {
 			if (pageIndex === 1) {
 				return self.options.limit + self.options.listOffset;
 			}
+
 			return limit;
 		},
 		/**
@@ -267,6 +272,7 @@ define(function (require) {
 				if (typeof parts.query !== 'undefined') {
 					args = elgg.parse_str(parts.query);
 				}
+
 				var split = self.options.baseUrl.split('?');
 				base = split[0] + '?';
 			}
@@ -413,6 +419,7 @@ define(function (require) {
 					dataType: 'html'
 				});
 			}
+
 			self.options.loadingPages[pageIndex].then(function (data) {
 				self.options.loadingPages[pageIndex] = null;
 				self.addFetchedItems(data, pageIndex, goToPage);
@@ -458,6 +465,7 @@ define(function (require) {
 				} else {
 					self.$list.html($newItems);
 				}
+
 				$newItems.last().nextAll().each(function () {
 					var index = $(this).data('item-index');
 					$(this).data('item-index', index + $newItems.length);
@@ -476,6 +484,7 @@ define(function (require) {
 				self.goToPage(pageIndex);
 				self.scrollToTop();
 			}
+
 			$(self).trigger('newItemsFetched', [pageIndex, $newItems]);
 		},
 		/**
@@ -492,6 +501,7 @@ define(function (require) {
 			if ($newItems.length) {
 				self.addPageItems(pageIndex, $newItems);
 			}
+
 			$(self).trigger('pageLoaded', [pageIndex, responseData]);
 		},
 		/**
@@ -517,6 +527,7 @@ define(function (require) {
 				self.options.ajaxListData = $list.data();
 				$list = $list.children('.elgg-list,.elgg-gallery');
 			}
+
 			return $list.children().filter(function () {
 				return !(self.$list.children().is('#' + $(this).attr('id')));
 			});
@@ -638,6 +649,7 @@ define(function (require) {
 					value: $($children[i]).data('item-index')
 				});
 			}
+
 			map.sort(function (a, b) {
 				return a.value - b.value;
 			});
@@ -645,6 +657,7 @@ define(function (require) {
 			for (i = 0; i < length; i++) {
 				self.$list.append($children[map[i].index]);
 			}
+
 			$(self).trigger('listSorted');
 		},
 		/**
@@ -656,6 +669,7 @@ define(function (require) {
 			if (e.isDefaultPrevented()) {
 				return;
 			}
+
 			// the handler for default confirm has been killed in bindEvents
 			if ($(this).is('[data-confirm],.elgg-requires-confirmation')) {
 				var confirmText = $(this).data('confirm') || elgg.echo('question:areyousure');
@@ -663,6 +677,7 @@ define(function (require) {
 					return false;
 				}
 			}
+
 			var $elem = $(this),
 				$list = $elem.closest('.elgg-list,.elgg-gallery'),
 				$item = $elem.closest($elem.closest('.elgg-list,.elgg-gallery').children()),
@@ -676,6 +691,7 @@ define(function (require) {
 			} else {
 				$elem.closest('.elgg-list,.elgg-gallery').hypeList('removeItems', $item);
 			}
+
 			// Doing a hard return
 			// Element has been removed, so there is no reason for other handlers to do anything
 			return false;

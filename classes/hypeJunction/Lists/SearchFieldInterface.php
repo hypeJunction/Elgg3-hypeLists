@@ -2,6 +2,7 @@
 
 namespace hypeJunction\Lists;
 
+/** Interface for search form field implementations. */
 interface SearchFieldInterface {
 
 	/**

@@ -6,8 +6,8 @@ use Elgg\Database\Clauses\WhereClause;
 use Elgg\Database\QueryBuilder;
 use hypeJunction\Lists\FilterInterface;
 
+/** class */
 class IsOnline implements FilterInterface {
-
 
 	/**
 	 * {@inheritdoc}
@@ -23,7 +23,7 @@ class IsOnline implements FilterInterface {
 		$filter = function (QueryBuilder $qb, $from_alias = 'e') {
 			$dt = strtotime('-10 minutes');
 
-			return $qb->compare("$from_alias.last_action", ">=", $dt, ELGG_VALUE_TIMESTAMP);
+			return $qb->compare("$from_alias.last_action", '>=', $dt, ELGG_VALUE_TIMESTAMP);
 		};
 
 		return new WhereClause($filter);

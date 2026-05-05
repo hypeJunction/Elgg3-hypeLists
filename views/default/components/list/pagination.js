@@ -99,6 +99,7 @@ define(function (require) {
 					} else {
 						$paginationItems = $paginationItems.add(self.buildPaginationItem('ellipsis', -1, false, true));
 					}
+
 					$paginationItems = $paginationItems.add(self.buildPaginationItem('', self.options.totalPages, false, false));
 				}
 
@@ -140,17 +141,13 @@ define(function (require) {
 					attr.class = 'elgg-next';
 					break;
 				case 'before' :
-					text = (pageIndex === 1 || pageIndex === self.options.totalPages) ?
-							elgg.echo(self.options.keyTextRemaining) :
-							elgg.echo(self.options.keyTextBefore, [self.options.limit]);
+					text = (pageIndex === 1 || pageIndex === self.options.totalPages) ? elgg.echo(self.options.keyTextRemaining) : elgg.echo(self.options.keyTextBefore, [self.options.limit]);
 					itemText = (active || disabled) ? null : text;
 					attr.rel = 'prev';
 					attr.class = 'elgg-before';
 					break;
 				case 'after' :
-					text = (pageIndex === 1 || pageIndex === self.options.totalPages) ?
-							elgg.echo(self.options.keyTextRemaining) :
-							elgg.echo(self.options.keyTextAfter, [self.options.limit]);
+					text = (pageIndex === 1 || pageIndex === self.options.totalPages) ? elgg.echo(self.options.keyTextRemaining) : elgg.echo(self.options.keyTextAfter, [self.options.limit]);
 					itemText = (active || disabled) ? null : text;
 					attr.rel = 'prev';
 					attr.class = 'elgg-after';
@@ -193,6 +190,7 @@ define(function (require) {
 					});
 					return;
 				}
+
 				$elem.on('click.hypeList', function (e) {
 					e.preventDefault();
 					$(this).addClass(self.options.classLoading);

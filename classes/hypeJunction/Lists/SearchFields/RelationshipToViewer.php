@@ -5,6 +5,7 @@ namespace hypeJunction\Lists\SearchFields;
 use hypeJunction\Lists\FilterInterface;
 use hypeJunction\Lists\Filters\IsOwnedBy;
 
+/** class */
 class RelationshipToViewer extends SearchField {
 
 	/**
@@ -32,11 +33,10 @@ class RelationshipToViewer extends SearchField {
 
 			$id = $filter_option::id();
 
-			$target = $this->collection->getTarget() ? : elgg_get_logged_in_user_entity();
+			$target = $this->collection->getTarget() ?: elgg_get_logged_in_user_entity();
+			$target_name = $target ? $target->getDisplayName() : '';
 
-			$filter_options_values[$id] = elgg_echo("sort:{$this->collection->getType()}:filter:$id", [
-				$target ? $target->getDisplayName() : ''
-			]);
+			$filter_options_values[$id] = elgg_echo("sort:{$this->collection->getType()}:filter:$id", [$target_name]);
 		}
 
 		$value = $this->getValue();
@@ -60,14 +60,14 @@ class RelationshipToViewer extends SearchField {
 				'options' => [
 					'type' => 'user',
 				],
-				'placeholder' => elgg_echo("sort:object:filter:placeholder:guids"),
+				'placeholder' => elgg_echo('sort:object:filter:placeholder:guids'),
 				'name' => $this->getName() . '[guids]',
 				'value' => elgg_extract('guids', $value),
 				'multiple' => true,
 			];
 		}
 
-		if (sizeof($fields) == 1) {
+		if (count($fields) == 1) {
 			$field = $fields[0];
 			$field['#label'] = elgg_echo("sort:{$this->collection->getType()}:filter:label");
 

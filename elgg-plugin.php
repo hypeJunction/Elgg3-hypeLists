@@ -21,7 +21,7 @@ return [
 			'resource' => 'collection/group',
 		],
 		'data' => [
-			'path'=> '/data/{segments}',
+			'path' => '/data/{segments}',
 			'controller' => \hypeJunction\Data\DataController::class,
 			'requirements' => [
 				'segments' => '.+',

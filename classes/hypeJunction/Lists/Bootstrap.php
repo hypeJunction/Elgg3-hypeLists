@@ -4,13 +4,13 @@ namespace hypeJunction\Lists;
 
 use Elgg\PluginBootstrap;
 
+/** Plugin bootstrap for hypelists. */
 class Bootstrap extends PluginBootstrap {
 
 	/**
 	 * {@inheritdoc}
 	 */
 	public function load() {
-
 	}
 
 	/**
@@ -30,23 +30,23 @@ class Bootstrap extends PluginBootstrap {
 			'page/components/ajax_list',
 		];
 
-		$views = \elgg_trigger_plugin_hook('get_views', 'framework:lists', null, $defaults);
+		$views = \elgg_trigger_event_results('get_views', 'framework:lists', [], $defaults);
 		foreach ($views as $view) {
-			\elgg_register_plugin_hook_handler('view', $view, 'hypelists_wrap_list_view_hook');
-			\elgg_register_plugin_hook_handler('view_vars', $view, 'hypelists_filter_vars');
+			\elgg_register_event_handler('view', $view, 'hypelists_wrap_list_view_hook');
+			\elgg_register_event_handler('view_vars', $view, 'hypelists_filter_vars');
 		}
 
 		\elgg_extend_view('elgg.css', 'collection/view.css');
 		\elgg_extend_view('elgg.css', 'forms/collection/search.css');
 
-		\elgg_register_plugin_hook_handler('adapter:entity', 'all', [\hypeJunction\Data\Extender::class, 'addData']);
-		\elgg_register_plugin_hook_handler('adapter:entity', 'all', [\hypeJunction\Data\Extender::class, 'addPermissions']);
-		\elgg_register_plugin_hook_handler('adapter:entity', 'all', [\hypeJunction\Data\Extender::class, 'addCounters']);
-		\elgg_register_plugin_hook_handler('adapter:entity', 'all', [\hypeJunction\Data\Extender::class, 'addDataLinks']);
+		\elgg_register_event_handler('adapter:entity', 'all', [\hypeJunction\Data\Extender::class, 'addData']);
+		\elgg_register_event_handler('adapter:entity', 'all', [\hypeJunction\Data\Extender::class, 'addPermissions']);
+		\elgg_register_event_handler('adapter:entity', 'all', [\hypeJunction\Data\Extender::class, 'addCounters']);
+		\elgg_register_event_handler('adapter:entity', 'all', [\hypeJunction\Data\Extender::class, 'addDataLinks']);
 
-		\elgg_register_plugin_hook_handler('adapter:entity', 'user', [\hypeJunction\Data\Extender::class, 'addUserData']);
-		\elgg_register_plugin_hook_handler('adapter:entity', 'group', [\hypeJunction\Data\Extender::class, 'addGroupData']);
-		\elgg_register_plugin_hook_handler('adapter:entity', 'object', [\hypeJunction\Data\Extender::class, 'addObjectData']);
+		\elgg_register_event_handler('adapter:entity', 'user', [\hypeJunction\Data\Extender::class, 'addUserData']);
+		\elgg_register_event_handler('adapter:entity', 'group', [\hypeJunction\Data\Extender::class, 'addGroupData']);
+		\elgg_register_event_handler('adapter:entity', 'object', [\hypeJunction\Data\Extender::class, 'addObjectData']);
 
 		\elgg_register_collection('collection:default', \hypeJunction\Lists\DefaultEntityCollection::class);
 	}
@@ -55,34 +55,29 @@ class Bootstrap extends PluginBootstrap {
 	 * {@inheritdoc}
 	 */
 	public function ready() {
-
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
 	public function shutdown() {
-
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
 	public function activate() {
-
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
 	public function deactivate() {
-
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
 	public function upgrade() {
-
 	}
 }

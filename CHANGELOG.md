@@ -1,3 +1,20 @@
+<a name="elgg5.x"></a>
+## Elgg 5.x Migration (2026-05-05)
+
+### Breaking Changes
+
+* **elgg5:** requires Elgg ^5.0 and PHP ^8.2
+* **hooks→events:** all plugin hook registrations migrated to event system (`elgg_register_event_handler`, `elgg_trigger_event_results`)
+* **type hints:** `\Elgg\Hook` replaced with `\Elgg\Event` in all callbacks
+* **removed functions:** `current_page_url()` → `elgg_get_current_url()`, `get_registered_entity_types()` → `elgg_get_registered_entity_types()`
+* **plugin id:** lowercased installer name from `hypeLists` to `hypelists` in composer.json
+
+### Internal
+
+* PHP 8.2 compatibility: `FILTER_SANITIZE_STRING` → `strip_tags()`, `sizeof()` → `count()`, `array_shift(array_keys())` → `array_key_first()`
+* Docker infra upgraded to PHP 8.2-apache, MySQL 8.0, Playwright v1.59.1
+* PHPCS Elgg standard applied; all violations resolved
+
 <a name="5.1.3"></a>
 ## [5.1.3](https://github.com/hypeJunctionPro/Elgg3-hypeLists/compare/5.1.2...5.1.3) (2018-08-10)
 

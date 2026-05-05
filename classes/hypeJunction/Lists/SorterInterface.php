@@ -4,6 +4,7 @@ namespace hypeJunction\Lists;
 
 use Elgg\Database\Clauses\WhereClause;
 
+/** Interface for entity list sorter implementations. */
 interface SorterInterface {
 
 	/**

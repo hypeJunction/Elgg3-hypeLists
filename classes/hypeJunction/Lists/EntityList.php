@@ -7,6 +7,9 @@ use Elgg\Database\Entities;
 use Elgg\Database\QueryBuilder;
 use ElggEntity;
 
+/**
+ * Elgg entities query builder with sorting, filtering, and search support.
+ */
 class EntityList extends Entities {
 
 	/**
@@ -46,12 +49,12 @@ class EntityList extends Entities {
 		$options = $this->options->getArrayCopy();
 
 		$types = $this->options->type_subtype_pairs;
-		if (sizeof($types) === 1) {
-			$type = array_shift(array_keys($types));
-			$fields = elgg_trigger_plugin_hook('search:fields', $type, $options, $fields);
+		if (count($types) === 1) {
+			$type = array_key_first($types);
+			$fields = elgg_trigger_event_results('search:fields', $type, $options, $fields);
 		}
 
-		$query = filter_var($query, FILTER_SANITIZE_STRING);
+		$query = strip_tags((string) $query);
 		$query = trim($query);
 
 		$words = preg_split('/\s+/', $query);

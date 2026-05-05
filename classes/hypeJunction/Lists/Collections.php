@@ -5,6 +5,7 @@ namespace hypeJunction\Lists;
 use ElggEntity;
 use InvalidParameterException;
 
+/** Registry of named collections for the hypelists framework. */
 class Collections {
 
 	/**
@@ -43,7 +44,7 @@ class Collections {
 
 		$class = $this->collections[$name];
 		if (!is_subclass_of($class, CollectionInterface::class)) {
-			throw new InvalidParameterException("Collection class " . $class . " must implement " . CollectionInterface::class);
+			throw new InvalidParameterException('Collection class ' . $class . ' must implement ' . CollectionInterface::class);
 		}
 
 		$collection = new $class($target, $params);
@@ -69,6 +70,5 @@ class Collections {
 		foreach ($fields as $field) {
 			$field->setConstraints();
 		}
-
 	}
 }

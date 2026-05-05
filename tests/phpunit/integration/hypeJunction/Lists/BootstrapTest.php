@@ -7,7 +7,7 @@ use hypeJunction\Data\DataController;
 use hypeJunction\Data\Extender;
 
 /**
- * Characterization suite for hypelists on Elgg 4.x.
+ * Characterization suite for hypelists on Elgg 5.x.
  *
  * hypelists is a query/filter/collection framework — 49 classes, no
  * entity subtypes. Test surface is plugin lifecycle, class autoloading
@@ -125,25 +125,25 @@ class BootstrapTest extends IntegrationTestCase {
 	// --- adapter:entity hook wiring (7 handlers from Bootstrap::init) ---
 
 	public function testAdapterEntityAllHookWired() {
-		$handlers = _elgg_services()->hooks->getAllHandlers();
+		$handlers = _elgg_services()->events->getAllHandlers();
 		$this->assertArrayHasKey('adapter:entity', $handlers);
 		$this->assertArrayHasKey('all', $handlers['adapter:entity']);
 	}
 
 	public function testAdapterEntityUserHookWired() {
-		$handlers = _elgg_services()->hooks->getAllHandlers();
+		$handlers = _elgg_services()->events->getAllHandlers();
 		$this->assertArrayHasKey('adapter:entity', $handlers);
 		$this->assertArrayHasKey('user', $handlers['adapter:entity']);
 	}
 
 	public function testAdapterEntityGroupHookWired() {
-		$handlers = _elgg_services()->hooks->getAllHandlers();
+		$handlers = _elgg_services()->events->getAllHandlers();
 		$this->assertArrayHasKey('adapter:entity', $handlers);
 		$this->assertArrayHasKey('group', $handlers['adapter:entity']);
 	}
 
 	public function testAdapterEntityObjectHookWired() {
-		$handlers = _elgg_services()->hooks->getAllHandlers();
+		$handlers = _elgg_services()->events->getAllHandlers();
 		$this->assertArrayHasKey('adapter:entity', $handlers);
 		$this->assertArrayHasKey('object', $handlers['adapter:entity']);
 	}

@@ -10,12 +10,12 @@ if (!$type || !$subtype) {
 $widget = elgg_extract('entity', $vars);
 
 switch ($widget->context) {
-	case 'dashboard' :
+	case 'dashboard':
 		$target = null;
 		$collection = "collection:$type:$subtype:all";
 		break;
 
-	default :
+	default:
 		$target = $widget->getOwnerEntity();
 		if ($target instanceof ElggUser) {
 			$collection = "collection:$type:$subtype:owner";
@@ -23,11 +23,10 @@ switch ($widget->context) {
 			$collection = "collection:$type:$subtype:group";
 		}
 		break;
-
 }
 
 $params = $vars;
-$params['limit'] = $widget->num_display ? : 4;
+$params['limit'] = $widget->num_display ?: 4;
 $params['full_view'] = false;
 $params['list_type'] = 'list';
 $params['pagination'] = false;

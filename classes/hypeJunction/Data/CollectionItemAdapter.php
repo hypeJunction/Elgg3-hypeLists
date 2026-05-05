@@ -2,6 +2,9 @@
 
 namespace hypeJunction\Data;
 
+/**
+ * Exports an ElggEntity to a serializable array for the data API.
+ */
 class CollectionItemAdapter {
 
 	/**
@@ -37,8 +40,8 @@ class CollectionItemAdapter {
 
 		$params['entity'] = $this->entity;
 
-		$data = elgg_trigger_plugin_hook('adapter:entity', "$type:$subtype", $params, $data);
-		$data = elgg_trigger_plugin_hook('adapter:entity', $type, $params, $data);
+		$data = elgg_trigger_event_results('adapter:entity', "$type:$subtype", $params, $data);
+		$data = elgg_trigger_event_results('adapter:entity', $type, $params, $data);
 
 		$expand = function($elem) use ($params, &$expand) {
 			if ($elem instanceof \ElggEntity) {

@@ -6,6 +6,7 @@ use Elgg\Database\Clauses\WhereClause;
 use Elgg\Database\QueryBuilder;
 use hypeJunction\Lists\SorterInterface;
 
+/** class */
 class FriendCount implements SorterInterface {
 
 	/**

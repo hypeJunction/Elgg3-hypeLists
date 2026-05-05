@@ -6,8 +6,8 @@ use Elgg\Database\Clauses\WhereClause;
 use Elgg\Database\QueryBuilder;
 use hypeJunction\Lists\FilterInterface;
 
+/** class */
 class IsInvited implements FilterInterface {
-
 
 	/**
 	 * {@inheritdoc}

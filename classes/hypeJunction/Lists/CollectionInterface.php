@@ -5,6 +5,7 @@ namespace hypeJunction\Lists;
 use Elgg\Database\Repository;
 use ElggEntity;
 
+/** interface */
 interface CollectionInterface {
 
 	/**
@@ -96,8 +97,6 @@ interface CollectionInterface {
 	/**
 	 * Build search fields from search options
 	 *
-	 * @param array $params Request params
-	 *
 	 * @return SearchFieldInterface[]
 	 */
 	public function getSearchFields();
@@ -184,8 +183,6 @@ interface CollectionInterface {
 
 	/**
 	 * Export a list into a serializable object
-	 *
-	 * @param array $params Export params
 	 *
 	 * @return mixed
 	 */

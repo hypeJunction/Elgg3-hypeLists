@@ -21,7 +21,7 @@ if ($entity) {
 }
 
 $data = [
-	'menu' => $menu ? : null,
+	'menu' => $menu ?: null,
 ];
 
 echo json_encode($data);

@@ -9,7 +9,7 @@ $public_metadata = [
 
 $public_metadata = array_merge($public_metadata, (array) elgg_get_registered_tag_metadata_names());
 
-$public_metadata = elgg_trigger_plugin_hook('public_metadata', 'search', [], $public_metadata);
+$public_metadata = elgg_trigger_event_results('public_metadata', 'search', [], $public_metadata);
 
 $options = [
 	'types' => get_input('types'),
@@ -24,6 +24,7 @@ if (is_array($metadata)) {
 		if (!in_array($name, $public_metadata)) {
 			throw new \Elgg\Exceptions\Http\EntityPermissionsException("'$name' is not public metadata");
 		}
+
 		$options['metadata_name_value_pairs'][] = [
 			'name' => $name,
 			'value' => $value,

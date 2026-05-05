@@ -5,6 +5,7 @@ namespace hypeJunction\Lists\SearchFields;
 use hypeJunction\Lists\FilterInterface;
 use hypeJunction\Lists\SorterInterface;
 
+/** Search field that exposes sort-order controls. */
 class Sort extends SearchField {
 
 	/**

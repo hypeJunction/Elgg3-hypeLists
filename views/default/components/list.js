@@ -25,9 +25,11 @@ define('hypeList', [
 				data = new hypeList(this, opts);
 				data.init.apply(data, args);
 			}
+
 			if (typeof option === 'string' && data.isPublicMethod(option)) {
 				data[option].apply(data, args);
 			}
+
 			$(this).data('hypeList', data);
 		});
 	};
@@ -45,6 +47,7 @@ define('hypeList', [
 			if (!$list.length) {
 				$list = $(this).siblings('.elgg-list,.elgg-gallery');
 			}
+
 			options = $.extend(true, {}, options, $(this).data());
 			var data = $(this).data('hypeListPagination');
 			if (!data) {
@@ -52,6 +55,7 @@ define('hypeList', [
 			} else {
 				data.options = options;
 			}
+
 			data.init();
 			$(this).data('hypeListPagination', data);
 		});

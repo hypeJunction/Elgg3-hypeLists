@@ -6,6 +6,7 @@ use Elgg\Database\Clauses\WhereClause;
 use Elgg\Database\QueryBuilder;
 use hypeJunction\Lists\SorterInterface;
 
+/** class */
 class LikesCount implements SorterInterface {
 
 	/**
@@ -14,7 +15,6 @@ class LikesCount implements SorterInterface {
 	public static function id() {
 		return 'likes_count';
 	}
-
 
 	/**
 	 * {@inheritdoc}

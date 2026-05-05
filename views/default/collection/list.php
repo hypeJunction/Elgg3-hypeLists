@@ -16,5 +16,5 @@ $id = elgg_extract('list_id', $vars);
 
 echo elgg_format_element('div', [
 	'id' => "list-sort-{$id}",
-	'class' => "elgg-sortable-list",
+	'class' => 'elgg-sortable-list',
 ], $form . $view);

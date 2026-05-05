@@ -2,6 +2,7 @@
 
 namespace hypeJunction\Lists\SearchFields;
 
+/** Search field for date-range filtering on time_created. */
 class CreatedBetween extends SearchField {
 
 	/**
@@ -16,7 +17,7 @@ class CreatedBetween extends SearchField {
 	 */
 	public function getField() {
 		$name = $this->getName();
-		$value = $this->getValue() ? : [];
+		$value = $this->getValue() ?: [];
 
 		return [
 			'#type' => 'fieldset',

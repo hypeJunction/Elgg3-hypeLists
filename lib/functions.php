@@ -3,23 +3,23 @@
 /**
  * Wrap list views into a container that can be manipulated
  *
- * @param \Elgg\Hook $hook Hook object
+ * @param \Elgg\Event $event Event object
  *
  * @return string|void Wrapped view
  */
-function hypelists_wrap_list_view_hook(\Elgg\Hook $hook) {
+function hypelists_wrap_list_view_hook(\Elgg\Event $event) {
 
-	$viewtype = $hook->getParam('viewtype', 'default');
+	$viewtype = $event->getParam('viewtype', 'default');
 	if ($viewtype !== 'default') {
 		return;
 	}
 
-	$type = $hook->getType();
-	$view = $hook->getValue();
-	$vars = $hook->getParam('vars');
+	$type = $event->getType();
+	$view = $event->getValue();
+	$vars = $event->getParam('vars');
 
 	$pagination = elgg_extract('pagination', $vars);
-	$pagination_type = elgg_extract('pagination_type', $vars, elgg_get_plugin_setting('pagination_type', 'hypeLists'));
+	$pagination_type = elgg_extract('pagination_type', $vars, elgg_get_plugin_setting('pagination_type', 'hypelists'));
 
 	if ($pagination === false) {
 		return;
@@ -90,13 +90,13 @@ function hypelists_wrap_list_view_hook(\Elgg\Hook $hook) {
 /**
  * Filters some of the view vars
  *
- * @param \Elgg\Hook $hook Hook object
+ * @param \Elgg\Event $event Event object
  *
  * @return array
  */
-function hypelists_filter_vars(\Elgg\Hook $hook) {
+function hypelists_filter_vars(\Elgg\Event $event) {
 
-	$vars = $hook->getValue();
+	$vars = $event->getValue();
 	$vars['base_url'] = hypelists_prepare_base_url(elgg_extract('base_url', $vars));
 
 	return $vars;
@@ -114,7 +114,7 @@ function hypelists_prepare_base_url($base_url = null) {
 	if (empty($base_url)) {
 		// navigation/pagination sets this to Referrer on XHR calls
 		// that causes trouble
-		$base_url = current_page_url();
+		$base_url = elgg_get_current_url();
 	}
 
 	// Need absolute URL (embed causes trouble)

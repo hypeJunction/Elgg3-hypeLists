@@ -2,6 +2,9 @@
 
 namespace hypeJunction\Data;
 
+/**
+ * Exports an ElggMenuItem to a serializable array for the data API.
+ */
 class ElggMenuItemAdapter {
 
 	/**
@@ -54,7 +57,7 @@ class ElggMenuItemAdapter {
 			$data['children'][] = $adapter->export($params);
 		}
 
-		$data = elgg_trigger_plugin_hook('adapter:menu_item', "menu:$this->menu_name", $params, $data);
+		$data = elgg_trigger_event_results('adapter:menu_item', "menu:$this->menu_name", $params, $data);
 
 		return $data;
 	}
