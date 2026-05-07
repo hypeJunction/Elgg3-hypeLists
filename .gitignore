@@ -10,5 +10,6 @@ robots.txt
 /mod/
 composer.lock
 Gemfile.lock
-yarn.locktests/.phpunit.result.cache
+yarn.lock
+tests/.phpunit.result.cache
 docker/.env
