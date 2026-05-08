@@ -2,8 +2,8 @@
 
 namespace hypeJunction\Lists;
 
+use Elgg\Exceptions\InvalidParameterException;
 use ElggEntity;
-use InvalidParameterException;
 
 class Collections {
 
