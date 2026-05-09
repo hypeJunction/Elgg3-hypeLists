@@ -1,8 +1,9 @@
 hypeLists
 =========
-![Elgg 5.0](https://img.shields.io/badge/Elgg-5.0-orange.svg?style=flat-square)
 
-A set of tools that improve UX and simplify common list patterns for developers.
+AJAX-powered lists for Elgg — pagination, infinite scroll, sorting, and search for entity lists.
+
+![Elgg 5.x](https://img.shields.io/badge/Elgg-5.x-orange.svg?style=flat-square)
 
 ### Features
 
