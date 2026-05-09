@@ -1,6 +1,6 @@
 <?php
 
-elgg_require_js('forms/collection/search');
+elgg_import_esm('js/forms/collection/search');
 
 $collection = elgg_extract('collection', $vars);
 

@@ -1,3 +1,17 @@
+<a name="elgg6.x"></a>
+## [6.0.0] — Elgg 6.x migration (2026-05-09)
+
+- Migrated to Elgg 6.x (5.x → 6.x). Requires PHP 8.2+.
+- Bumped `elgg/elgg` constraint to `^6.0`.
+- AMD JS removed: all `views/default/components/` and `views/default/forms/collection/` JS converted to ES modules at `views/default/js/`.
+- `elgg.echo()` → `import { echo } from 'elgg/i18n'` in all JS modules.
+- `require(['hypeList'], cb)` dynamic AMD → `import('js/components/list').then(cb)`.
+- `require.php` inline `<script>require([...])</script>` → `elgg_import_esm()`.
+- `elgg_require_js()` → `elgg_import_esm()` in forms/collection/search.php.
+- Docker stack upgraded to Elgg 6.x, PHPUnit ~10.5.
+
+---
+
 <a name="elgg5.x"></a>
 ## Elgg 5.x Migration (2026-05-05)
 

@@ -1,8 +1,8 @@
-# hypeLists — Architecture (Elgg 5.x)
+# hypeLists — Architecture (Elgg 6.x)
 
 ## Overview
 
-hypeLists is an Elgg 5.x plugin that provides a composable query/filter/sort framework
+hypeLists is an Elgg 6.x plugin that provides a composable query/filter/sort framework
 for building paginated entity lists. It ships a data adapter API, collection primitives,
 search fields, sorters, filters, and JSON/HTML rendering.
 
@@ -13,7 +13,7 @@ all events during `load()`. No `start.php` or `manifest.xml`.
 
 ## Event Registrations
 
-All hooks migrated to the Elgg 5.x event system:
+All hooks migrated to the Elgg 6.x event system:
 
 | Event name | Type | Handler |
 |---|---|---|
