@@ -1,6 +1,6 @@
 hypeLists
 =========
-![Elgg 3.0](https://img.shields.io/badge/Elgg-3.0-orange.svg?style=flat-square)
+![Elgg 5.0](https://img.shields.io/badge/Elgg-5.0-orange.svg?style=flat-square)
 
 A set of tools that improve UX and simplify common list patterns for developers.
 
@@ -25,7 +25,6 @@ if you have ```'pagination' => true``` in your options. Additional options, that
 * ```'lazy_load'```        INT can be used to initialize lazy loading of pages
 * ```'auto_refresh'```     INT can be used to specify at which interval in seconds new items should be fetched
 * ```'reversed'```         BOOL can be used to specify reversed lists. If list is reversed, it is assumed that the new items will be located at the end of the list
-
 
 ### Client-Side
 
@@ -81,7 +80,6 @@ $('.elgg-list').trigger('removeItems', [$items]);
 // Add new items to the list
 $('.elgg-list').trigger('addFetchedItems', [ajaxData]);
 
-
 // Events
 
 // Event triggered whenever the list is first rendered
@@ -93,5 +91,4 @@ $('.elgg-list').on('ready', callback);
 $('.elgg-list').on('change', callback);
 
 ```
-
 
