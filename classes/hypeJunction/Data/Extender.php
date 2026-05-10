@@ -17,7 +17,10 @@ class Extender {
 	 *
 	 * @return array
 	 */
-	public static function addData($hook, $type, $return, $params) {
+	public static function addData(\Elgg\Event $event) {
+		$return = $event->getValue();
+		$params = $event->getParams();
+		$type = $event->getType();
 
 		$entity = elgg_extract('entity', $params);
 		/* @var $entity ElggEntity */
@@ -99,7 +102,10 @@ class Extender {
 	 *
 	 * @return array
 	 */
-	public static function addPermissions($hook, $type, $return, $params) {
+	public static function addPermissions(\Elgg\Event $event) {
+		$return = $event->getValue();
+		$params = $event->getParams();
+		$type = $event->getType();
 
 		$entity = elgg_extract('entity', $params);
 		/* @var $entity ElggEntity */
@@ -144,7 +150,9 @@ class Extender {
 	 *
 	 * @return array
 	 */
-	public static function addUserData($hook, $type, $return, $params) {
+	public static function addUserData(\Elgg\Event $event) {
+		$return = $event->getValue();
+		$params = $event->getParams();
 
 		$entity = elgg_extract('entity', $params);
 		/* @var $entity \ElggUser */
@@ -187,7 +195,9 @@ class Extender {
 	 *
 	 * @return array
 	 */
-	public static function addGroupData($hook, $type, $return, $params) {
+	public static function addGroupData(\Elgg\Event $event) {
+		$return = $event->getValue();
+		$params = $event->getParams();
 
 		$entity = elgg_extract('entity', $params);
 		/* @var $entity \ElggGroup */
@@ -231,7 +241,9 @@ class Extender {
 	 *
 	 * @return array
 	 */
-	public static function addObjectData($hook, $type, $return, $params) {
+	public static function addObjectData(\Elgg\Event $event) {
+		$return = $event->getValue();
+		$params = $event->getParams();
 
 		$entity = elgg_extract('entity', $params);
 		/* @var $entity \ElggObject */
@@ -265,7 +277,9 @@ class Extender {
 	 *
 	 * @return array
 	 */
-	public static function addCounters($hook, $type, $return, $params) {
+	public static function addCounters(\Elgg\Event $event) {
+		$return = $event->getValue();
+		$params = $event->getParams();
 
 		$entity = elgg_extract('entity', $params);
 		/* @var $entity ElggEntity */
@@ -290,7 +304,10 @@ class Extender {
 	 *
 	 * @return array
 	 */
-	public static function addDataLinks($hook, $type, $return, $params) {
+	public static function addDataLinks(\Elgg\Event $event) {
+		$return = $event->getValue();
+		$params = $event->getParams();
+		$type = $event->getType();
 
 		$entity = elgg_extract('entity', $params);
 
