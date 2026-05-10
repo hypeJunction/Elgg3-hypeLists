@@ -3,7 +3,7 @@ hypeLists
 
 AJAX-powered lists for Elgg — pagination, infinite scroll, sorting, and search for entity lists.
 
-![Elgg 5.x](https://img.shields.io/badge/Elgg-5.x-orange.svg?style=flat-square)
+![Elgg 7.x](https://img.shields.io/badge/Elgg-7.x-orange.svg?style=flat-square)
 
 ### Features
 
@@ -93,3 +93,9 @@ $('.elgg-list').on('change', callback);
 
 ```
 
+
+## Compatibility
+
+| Plugin version | Elgg version |
+|---|---|
+| current | 7.x |
