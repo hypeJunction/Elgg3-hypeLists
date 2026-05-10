@@ -93,7 +93,6 @@ $('.elgg-list').on('change', callback);
 
 ```
 
-
 ## Compatibility
 
 | Plugin version | Elgg version |
