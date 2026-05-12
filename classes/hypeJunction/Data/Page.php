@@ -20,7 +20,8 @@ class Page {
 	 *
 	 * @return array
 	 */
-	public static function captureContext($hook, $type, $return, $params) {
+	public static function captureContext(\Elgg\Event $event) {
+		$return = $event->getValue();
 
 		$page_owner_guid = 0;
 		$page_owner_export = null;
