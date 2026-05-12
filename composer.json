@@ -1,43 +1,43 @@
 {
-    "name": "hypejunction/hypelists",
-    "version": "6.0.0",
-    "type": "elgg-plugin",
-    "description": "AJAX-powered lists for Elgg — pagination, infinite scroll, sorting, and search for entity lists.",
-    "homepage": "https://github.com/hypeJunction/Elgg3-hypeLists",
-    "keywords": [
-        "elgg",
-        "plugin",
-        "hypejunction",
-        "hypelist",
-        "lists",
-        "ajax"
-    ],
-    "license": "GPL-2.0-or-later",
-    "authors": [
-        {
-            "name": "Ismayil Khayredinov",
-            "email": "ismayil.khayredinov@gmail.com"
-        }
-    ],
-    "extra": {
-        "installer-name": "hypelists",
-        "elgg-plugin": {
-            "id": "hypelists"
-        }
-    },
-    "require": {
-        "php": ">=8.2",
-        "composer/installers": "^2.0",
-        "elgg/elgg": "^6.0"
-    },
-    "autoload": {
-        "psr-0": {
-            "": "classes/"
-        }
-    },
-    "config": {
-        "allow-plugins": {
-            "composer/installers": true
-        }
-    }
+	"name": "hypejunction/hypelists",
+	"version": "6.0.0",
+	"type": "elgg-plugin",
+	"description": "AJAX-powered lists for Elgg — pagination, infinite scroll, sorting, and search for entity lists.",
+	"homepage": "https://github.com/hypeJunction/Elgg3-hypeLists",
+	"keywords": [
+		"elgg",
+		"plugin",
+		"hypejunction",
+		"hypelist",
+		"lists",
+		"ajax"
+	],
+	"license": "GPL-2.0-or-later",
+	"authors": [
+		{
+			"name": "Ismayil Khayredinov",
+			"email": "ismayil.khayredinov@gmail.com"
+		}
+	],
+	"extra": {
+		"installer-name": "hypelists",
+		"elgg-plugin": {
+			"id": "hypelists"
+		}
+	},
+	"require": {
+		"php": ">=8.1",
+		"composer/installers": "^2.0",
+		"elgg/elgg": "^6.0"
+	},
+	"autoload": {
+		"psr-0": {
+			"": "classes/"
+		}
+	},
+	"config": {
+		"allow-plugins": {
+			"composer/installers": true
+		}
+	}
 }
