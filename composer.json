@@ -1,43 +1,43 @@
 {
-	"name": "hypejunction/hypelists",
-	"version": "5.1.3",
-	"type": "elgg-plugin",
-	"description": "AJAX lists for Elgg",
-	"homepage": "http://hypejunction.com/",
-	"keywords": [
-		"elgg",
-		"plugin",
-		"hypejunction",
-		"hypelist",
-		"lists",
-		"ajax"
-	],
-	"license": "proprietary",
-	"authors": [
-		{
-			"name": "Ismayil Khayredinov",
-			"email": "info@hypejunction.com"
-		}
-	],
-	"extra": {
-		"installer-name": "hypeLists",
-		"elgg-plugin": {
-			"id": "hypelists"
-		}
-	},
-	"require": {
-		"php": ">=7.4",
-		"composer/installers": "^2.0",
-		"elgg/elgg": "^4.0"
-	},
-	"autoload": {
-		"psr-0": {
-			"": "classes/"
-		}
-	},
-	"config": {
-		"allow-plugins": {
-			"composer/installers": true
-		}
-	}
+    "name": "hypejunction/hypelists",
+    "version": "4.0.0",
+    "type": "elgg-plugin",
+    "description": "AJAX lists for Elgg",
+    "homepage": "http://hypejunction.com/",
+    "keywords": [
+        "elgg",
+        "plugin",
+        "hypejunction",
+        "hypelist",
+        "lists",
+        "ajax"
+    ],
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Ismayil Khayredinov",
+            "email": "info@hypejunction.com"
+        }
+    ],
+    "extra": {
+        "installer-name": "hypeLists",
+        "elgg-plugin": {
+            "id": "hypelists"
+        }
+    },
+    "require": {
+        "php": ">=7.4",
+        "composer/installers": "^2.0",
+        "elgg/elgg": "^4.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "": "classes/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    }
 }
