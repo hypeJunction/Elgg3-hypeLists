@@ -20,7 +20,7 @@
         }
     ],
     "extra": {
-        "installer-name": "hypeLists",
+        "installer-name": "hypelists",
         "elgg-plugin": {
             "id": "hypelists"
         }
