@@ -288,8 +288,8 @@ class Extender {
 			return;
 		}
 
-		$return['_counters']['comments'] = elgg_get_total_comments($entity);
-		$return['_counters']['likes'] = elgg_get_total_likes($entity);
+		$return['_counters']['comments'] = ($entity instanceof \ElggEntity ? $entity->countComments() : 0);
+		$return['_counters']['likes'] = ($entity instanceof \ElggEntity ? $entity->countAnnotations("likes") : 0);
 
 		return $return;
 	}
