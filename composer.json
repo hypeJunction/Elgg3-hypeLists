@@ -1,8 +1,7 @@
 {
     "name": "hypejunction/hypelists",
-    "version": "6.0.0",
     "type": "elgg-plugin",
-    "description": "AJAX-powered lists for Elgg — pagination, infinite scroll, sorting, and search for entity lists.",
+    "description": "AJAX-powered lists for Elgg \u2014 pagination, infinite scroll, sorting, and search for entity lists.",
     "homepage": "https://github.com/hypeJunction/Elgg3-hypeLists",
     "keywords": [
         "elgg",
