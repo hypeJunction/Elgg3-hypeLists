@@ -33,9 +33,11 @@ foreach ($collection->getMenu() as $item) {
 
 elgg_push_collection_breadcrumbs($type, $subtype);
 
+$title = (string) ($collection->getDisplayName() ?? '');
+
 $layout = elgg_view_layout('default', [
 	'collection' => $collection,
-	'title' => $collection->getDisplayName(),
+	'title' => $title,
 	'content' => $content,
 	'sidebar' => elgg_view('collection/sidebar', [
 		'collection' => $collection,
