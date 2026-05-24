@@ -10,10 +10,7 @@ class Extender {
 	/**
 	 * Add entity specific data
 	 *
-	 * @param string $hook   "adapter:entity"
-	 * @param string $type   "all"
-	 * @param array  $return Data
-	 * @param array  $params Hook params
+	 * @param \Elgg\Event $event "adapter:entity", "all"
 	 *
 	 * @return array
 	 */
@@ -95,10 +92,7 @@ class Extender {
 	/**
 	 * Add permissions
 	 *
-	 * @param string $hook   "adapter:entity"
-	 * @param string $type   "all"
-	 * @param array  $return Data
-	 * @param array  $params Hook params
+	 * @param \Elgg\Event $event "adapter:entity", "all"
 	 *
 	 * @return array
 	 */
@@ -143,10 +137,7 @@ class Extender {
 	/**
 	 * Add user specific data
 	 *
-	 * @param string $hook   "adapter:entity"
-	 * @param string $type   "user"
-	 * @param array  $return Data
-	 * @param array  $params Hook params
+	 * @param \Elgg\Event $event "adapter:entity", "user"
 	 *
 	 * @return array
 	 */
@@ -188,10 +179,7 @@ class Extender {
 	/**
 	 * Add group specific data
 	 *
-	 * @param string $hook   "adapter:entity"
-	 * @param string $type   "group"
-	 * @param array  $return Data
-	 * @param array  $params Hook params
+	 * @param \Elgg\Event $event "adapter:entity", "group"
 	 *
 	 * @return array
 	 */
@@ -234,10 +222,7 @@ class Extender {
 	/**
 	 * Add object data
 	 *
-	 * @param string $hook   "adapter:entity"
-	 * @param string $type   "object"
-	 * @param array  $return Data
-	 * @param array  $params Hook params
+	 * @param \Elgg\Event $event "adapter:entity", "object"
 	 *
 	 * @return array
 	 */
@@ -270,10 +255,7 @@ class Extender {
 	/**
 	 * Add counters
 	 *
-	 * @param string $hook   "adapter:entity"
-	 * @param string $type   "all"
-	 * @param array  $return Data
-	 * @param array  $params Hook params
+	 * @param \Elgg\Event $event "adapter:entity", "all"
 	 *
 	 * @return array
 	 */
@@ -289,7 +271,7 @@ class Extender {
 		}
 
 		$return['_counters']['comments'] = ($entity instanceof \ElggEntity ? $entity->countComments() : 0);
-		$return['_counters']['likes'] = ($entity instanceof \ElggEntity ? $entity->countAnnotations("likes") : 0);
+		$return['_counters']['likes'] = ($entity instanceof \ElggEntity ? $entity->countAnnotations('likes') : 0);
 
 		return $return;
 	}
@@ -297,10 +279,7 @@ class Extender {
 	/**
 	 * Add data links to entity export
 	 *
-	 * @param string $hook   "adapter:entity"
-	 * @param string $type   "all"
-	 * @param array  $return Data
-	 * @param array  $params Hook params
+	 * @param \Elgg\Event $event "adapter:entity", "all"
 	 *
 	 * @return array
 	 */

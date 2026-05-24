@@ -13,10 +13,7 @@ class Page {
 	 * and validate request signature, when /data endpoints are
 	 * accessed
 	 *
-	 * @param string $hook   "elgg.data"
-	 * @param string $type   "page"
-	 * @param array  $return Data
-	 * @param array  $params Hook params
+	 * @param \Elgg\Event $event "elgg.data", "page"
 	 *
 	 * @return array
 	 */
