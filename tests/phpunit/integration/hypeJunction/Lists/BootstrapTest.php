@@ -28,15 +28,15 @@ class BootstrapTest extends IntegrationTestCase {
 	// --- plugin lifecycle ---
 
 	public function testPluginIsRegistered() {
-		$this->assertInstanceOf(\ElggPlugin::class, elgg_get_plugin_from_id('hypelists'));
+		$this->assertInstanceOf(\ElggPlugin::class, \elgg_get_plugin_from_id('hypelists'));
 	}
 
 	public function testPluginIsEnabled() {
-		$this->assertTrue(elgg_get_plugin_from_id('hypelists')->isEnabled());
+		$this->assertTrue(\elgg_get_plugin_from_id('hypelists')->isEnabled());
 	}
 
 	public function testPluginIsActive() {
-		$this->assertTrue(elgg_get_plugin_from_id('hypelists')->isActive());
+		$this->assertTrue(\elgg_get_plugin_from_id('hypelists')->isActive());
 	}
 
 	// --- core class autoloading (Bootstrap + collection framework) ---
@@ -125,25 +125,25 @@ class BootstrapTest extends IntegrationTestCase {
 	// --- adapter:entity hook wiring (7 handlers from Bootstrap::init) ---
 
 	public function testAdapterEntityAllHookWired() {
-		$handlers = _elgg_services()->hooks->getAllHandlers();
+		$handlers = \_elgg_services()->hooks->getAllHandlers();
 		$this->assertArrayHasKey('adapter:entity', $handlers);
 		$this->assertArrayHasKey('all', $handlers['adapter:entity']);
 	}
 
 	public function testAdapterEntityUserHookWired() {
-		$handlers = _elgg_services()->hooks->getAllHandlers();
+		$handlers = \_elgg_services()->hooks->getAllHandlers();
 		$this->assertArrayHasKey('adapter:entity', $handlers);
 		$this->assertArrayHasKey('user', $handlers['adapter:entity']);
 	}
 
 	public function testAdapterEntityGroupHookWired() {
-		$handlers = _elgg_services()->hooks->getAllHandlers();
+		$handlers = \_elgg_services()->hooks->getAllHandlers();
 		$this->assertArrayHasKey('adapter:entity', $handlers);
 		$this->assertArrayHasKey('group', $handlers['adapter:entity']);
 	}
 
 	public function testAdapterEntityObjectHookWired() {
-		$handlers = _elgg_services()->hooks->getAllHandlers();
+		$handlers = \_elgg_services()->hooks->getAllHandlers();
 		$this->assertArrayHasKey('adapter:entity', $handlers);
 		$this->assertArrayHasKey('object', $handlers['adapter:entity']);
 	}
@@ -172,13 +172,13 @@ class BootstrapTest extends IntegrationTestCase {
 		//   elgg_register_collection('collection:default', DefaultEntityCollection::class)
 		// so elgg_get_collection('collection:default') should produce an
 		// instance of DefaultEntityCollection.
-		$collection = elgg_get_collection('collection:default');
+		$collection = \elgg_get_collection('collection:default');
 		$this->assertInstanceOf(DefaultEntityCollection::class, $collection);
 		$this->assertInstanceOf(CollectionInterface::class, $collection);
 	}
 
 	public function testDefaultEntityCollectionIdMatchesRegisteredName() {
-		$collection = elgg_get_collection('collection:default');
+		$collection = \elgg_get_collection('collection:default');
 		$this->assertSame('collection:default', $collection->getId());
 	}
 }

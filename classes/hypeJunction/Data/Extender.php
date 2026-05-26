@@ -18,7 +18,7 @@ class Extender {
 	 */
 	public static function addData($hook, $type, $return, $params) {
 
-		$entity = elgg_extract('entity', $params);
+		$entity = \elgg_extract('entity', $params);
 		/* @var $entity ElggEntity */
 
 		if (!$entity instanceof ElggEntity) {
@@ -28,7 +28,7 @@ class Extender {
 		$type = $entity->type;
 		$subtype = $entity->getSubtype();
 
-		if (elgg_is_admin_logged_in()) {
+		if (\elgg_is_admin_logged_in()) {
 			$return['metadata'] = $entity->getAllMetadata();
 		}
 
@@ -44,7 +44,7 @@ class Extender {
 
 		foreach (['excerpt', 'briefdescription', 'description'] as $prop) {
 			if ($entity->$prop) {
-				$return['summary'] = elgg_get_excerpt($entity->$prop);
+				$return['summary'] = \elgg_get_excerpt($entity->$prop);
 				break;
 			}
 		}
@@ -52,7 +52,7 @@ class Extender {
 		$return['_links']['icons'] = [];
 		$return['_links']['cover'] = [];
 
-		$icon_sizes = array_keys((array) elgg_get_icon_sizes($type, $subtype));
+		$icon_sizes = array_keys((array) \elgg_get_icon_sizes($type, $subtype));
 
 		foreach ($icon_sizes as $icon_size) {
 			$return['_links']['icons'][$icon_size] = $entity->getIconURL([
@@ -61,7 +61,7 @@ class Extender {
 			]);
 		}
 
-		$cover_sizes = array_keys((array) elgg_get_icon_sizes($type, $subtype, 'cover'));
+		$cover_sizes = array_keys((array) \elgg_get_icon_sizes($type, $subtype, 'cover'));
 
 		foreach ($cover_sizes as $cover_size) {
 			$return['_links']['cover'][$cover_size] = $entity->getIconURL([
@@ -71,13 +71,13 @@ class Extender {
 			]);
 		}
 
-		$tag_names = elgg_get_registered_tag_metadata_names();
+		$tag_names = \elgg_get_registered_tag_metadata_names();
 		foreach ($tag_names as $tag_name) {
 			$return[$tag_name] = [];
 			foreach ((array) $entity->$tag_name as $tag) {
 				$return[$tag_name][] = [
 					'label' => $tag,
-					'url' => elgg_http_add_url_query_elements(elgg_normalize_url('search'), [
+					'url' => \elgg_http_add_url_query_elements(\elgg_normalize_url('search'), [
 						'q' => $tag,
 						'search_type' => 'tags',
 					]),
@@ -100,7 +100,7 @@ class Extender {
 	 */
 	public static function addPermissions($hook, $type, $return, $params) {
 
-		$entity = elgg_extract('entity', $params);
+		$entity = \elgg_extract('entity', $params);
 		/* @var $entity ElggEntity */
 
 		if (!$entity instanceof ElggEntity) {
@@ -145,14 +145,14 @@ class Extender {
 	 */
 	public static function addUserData($hook, $type, $return, $params) {
 
-		$entity = elgg_extract('entity', $params);
+		$entity = \elgg_extract('entity', $params);
 		/* @var $entity \ElggUser */
 
 		if (!$entity instanceof \ElggUser) {
 			return;
 		}
 
-		$fields = (array) elgg_get_config('profile_fields');
+		$fields = (array) \elgg_get_config('profile_fields');
 		foreach ($fields as $field => $field_type) {
 			if (isset($return[$field])) {
 				continue;
@@ -161,15 +161,15 @@ class Extender {
 			$return[$field] = $entity->$field;
 		}
 
-		$return['_counters']['friends'] = elgg_get_total_friends($entity);
-		$return['_links']['friends'] = elgg_http_add_url_query_elements("user/friends", [
+		$return['_counters']['friends'] = \elgg_get_total_friends($entity);
+		$return['_links']['friends'] = \elgg_http_add_url_query_elements("user/friends", [
 			'guid' => $entity->guid,
 		]);
-		$return['_links']['friends_of'] = elgg_http_add_url_query_elements("user/friends_of", [
+		$return['_links']['friends_of'] = \elgg_http_add_url_query_elements("user/friends_of", [
 			'guid' => $entity->guid,
 		]);
 
-		$user_guid = elgg_get_logged_in_user_guid();
+		$user_guid = \elgg_get_logged_in_user_guid();
 		$return['_relationships']['friend'] = $entity->isFriendsWith($user_guid);
 		$return['_relationships']['friend_of'] = $entity->isFriendOf($user_guid);
 
@@ -188,14 +188,14 @@ class Extender {
 	 */
 	public static function addGroupData($hook, $type, $return, $params) {
 
-		$entity = elgg_extract('entity', $params);
+		$entity = \elgg_extract('entity', $params);
 		/* @var $entity \ElggGroup */
 
 		if (!$entity instanceof \ElggGroup) {
 			return;
 		}
 
-		$fields = (array) elgg_get_config('group');
+		$fields = (array) \elgg_get_config('group');
 		foreach ($fields as $field => $field_type) {
 			if (isset($return[$field])) {
 				continue;
@@ -209,12 +209,12 @@ class Extender {
 		$return['access']['membership'] = $entity->membership;
 		$return['access']['group_acl'] = $entity->group_acl;
 
-		$return['_counters']['members'] = elgg_get_total_members($entity);
-		$return['_links']['members'] = elgg_http_add_url_query_elements("group/members", [
+		$return['_counters']['members'] = \elgg_get_total_members($entity);
+		$return['_links']['members'] = \elgg_http_add_url_query_elements("group/members", [
 			'guid' => $entity->guid,
 		]);
 
-		$user = elgg_get_logged_in_user_entity();
+		$user = \elgg_get_logged_in_user_entity();
 		$return['_relationships']['member'] = $entity->isMember($user);
 
 		return $return;
@@ -232,7 +232,7 @@ class Extender {
 	 */
 	public static function addObjectData($hook, $type, $return, $params) {
 
-		$entity = elgg_extract('entity', $params);
+		$entity = \elgg_extract('entity', $params);
 		/* @var $entity \ElggObject */
 
 		if (!$entity instanceof \ElggObject) {
@@ -242,8 +242,8 @@ class Extender {
 		$return['access'] = self::getAccessData($entity);
 
 		if ($entity instanceof \ElggFile) {
-			$return['_links']['download'] = elgg_get_download_url($entity);
-			$return['_links']['inline'] = elgg_get_inline_url($entity);
+			$return['_links']['download'] = \elgg_get_download_url($entity);
+			$return['_links']['inline'] = \elgg_get_inline_url($entity);
 
 			$return['media'] = [
 				'display' => 'image',
@@ -266,15 +266,15 @@ class Extender {
 	 */
 	public static function addCounters($hook, $type, $return, $params) {
 
-		$entity = elgg_extract('entity', $params);
+		$entity = \elgg_extract('entity', $params);
 		/* @var $entity ElggEntity */
 
 		if (!$entity instanceof ElggEntity) {
 			return;
 		}
 
-		$return['_counters']['comments'] = elgg_get_total_comments($entity);
-		$return['_counters']['likes'] = elgg_get_total_likes($entity);
+		$return['_counters']['comments'] = \elgg_get_total_comments($entity);
+		$return['_counters']['likes'] = \elgg_get_total_likes($entity);
 
 		return $return;
 	}
@@ -291,7 +291,7 @@ class Extender {
 	 */
 	public static function addDataLinks($hook, $type, $return, $params) {
 
-		$entity = elgg_extract('entity', $params);
+		$entity = \elgg_extract('entity', $params);
 
 		if (!$entity instanceof ElggEntity) {
 			return;
@@ -301,7 +301,7 @@ class Extender {
 		$subtype = $entity->getSubtype();
 
 		if ($entity->owner_guid) {
-			$return['_links']['owner'] = elgg_http_add_url_query_elements("data/entity", [
+			$return['_links']['owner'] = \elgg_http_add_url_query_elements("data/entity", [
 				'guid' => $entity->owner_guid,
 			]);
 		} else {
@@ -309,21 +309,21 @@ class Extender {
 		}
 
 		if ($entity->container_guid) {
-			$return['_links']['container'] = elgg_http_add_url_query_elements("data/entity", [
+			$return['_links']['container'] = \elgg_http_add_url_query_elements("data/entity", [
 				'guid' => $entity->container_guid,
 			]);
 		} else {
 			$return['_links']['container'] = false;
 		}
 
-		$return['_links']['comments'] = elgg_http_add_url_query_elements("data/comments", [
+		$return['_links']['comments'] = \elgg_http_add_url_query_elements("data/comments", [
 			'guid' => $entity->guid,
 		]);
 
-		if (elgg_is_active_plugin('likes')) {
-			$likable = (bool) elgg_trigger_plugin_hook('likes:is_likable', "$type:$subtype", [], false);
+		if (\elgg_is_active_plugin('likes')) {
+			$likable = (bool) \elgg_trigger_plugin_hook('likes:is_likable', "$type:$subtype", [], false);
 			if ($likable) {
-				$return['_links']['likes'] = elgg_http_add_url_query_elements("data/likes", [
+				$return['_links']['likes'] = \elgg_http_add_url_query_elements("data/likes", [
 					'guid' => $entity->guid,
 				]);
 			} else {

@@ -32,17 +32,17 @@ class Sort extends SearchField {
 
 			$id = $class::id();
 			foreach (['asc', 'desc'] as $direction) {
-				$sort_options_values["$id::$direction"] = elgg_echo("sort:{$this->collection->getType()}:{$id}::{$direction}");
+				$sort_options_values["$id::$direction"] = \elgg_echo("sort:{$this->collection->getType()}:{$id}::{$direction}");
 			}
 		}
 
 		return [
 			'#type' => 'select',
-			'#label' => elgg_echo("sort:{$this->collection->getType()}:label"),
+			'#label' => \elgg_echo("sort:{$this->collection->getType()}:label"),
 			'name' => $this->getName(),
 			'value' => $this->getValue(),
 			'options_values' => $sort_options_values,
-			'placeholder' => elgg_echo("sort:{$this->collection->getType()}:placeholder"),
+			'placeholder' => \elgg_echo("sort:{$this->collection->getType()}:placeholder"),
 		];
 	}
 

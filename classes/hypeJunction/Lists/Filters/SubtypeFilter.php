@@ -25,7 +25,7 @@ class SubtypeFilter implements FilterInterface {
 	 * @return WhereClause|null
 	 */
 	public static function build(\ElggEntity $target = null, array $params = []) {
-		$subtype = elgg_extract('subtype', $params);
+		$subtype = \elgg_extract('subtype', $params);
 
 		if (!$subtype) {
 			return null;

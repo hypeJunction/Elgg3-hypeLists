@@ -20,7 +20,7 @@ class IsOwnedBy implements FilterInterface {
 	 */
 	public static function build(\ElggEntity $target = null, array $params = []) {
 
-		$targets = elgg_extract('guids', $params, []);
+		$targets = \elgg_extract('guids', $params, []);
 
 		if (empty($targets)) {
 			$targets[] = $target;

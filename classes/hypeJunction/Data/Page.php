@@ -21,7 +21,7 @@ class Page {
 
 		$page_owner_guid = 0;
 		$page_owner_export = null;
-		$page_owner = elgg_get_page_owner_entity();
+		$page_owner = \elgg_get_page_owner_entity();
 		if ($page_owner) {
 			$page_owner_guid = (int) $page_owner->guid;
 			$adapter = new CollectionItemAdapter($page_owner);
@@ -30,18 +30,18 @@ class Page {
 
 		$logged_in_user_guid = 0;
 		$logged_in_user_export = null;
-		$logged_in_user = elgg_get_logged_in_user_entity();
+		$logged_in_user = \elgg_get_logged_in_user_entity();
 		if ($logged_in_user) {
 			$logged_in_user_guid = (int) $logged_in_user->guid;
 			$adapter = new CollectionItemAdapter($logged_in_user);
 			$logged_in_user_export = $adapter->export();
 		}
 
-		$contexts = elgg_get_context_stack();
-		$input = (array) elgg_get_config("input");
+		$contexts = \elgg_get_context_stack();
+		$input = (array) \elgg_get_config("input");
 
 		$data = serialize([$logged_in_user_guid, $page_owner_guid, $contexts, $input]);
-		$mac = elgg_build_hmac($data)->getToken();
+		$mac = \elgg_build_hmac($data)->getToken();
 
 		$return['context'] = [
 			'user' => $logged_in_user_export,
@@ -61,24 +61,24 @@ class Page {
 	 */
 	public static function restoreContext() {
 
-		$logged_in_user_guid = (int) elgg_get_logged_in_user_guid();
+		$logged_in_user_guid = (int) \elgg_get_logged_in_user_guid();
 
 		$context = (array) get_input('__context', []);
-		$page_owner_guid = (int) elgg_extract('page_owner_guid', $context);
-		$contexts = (array) elgg_extract('context_stack', $context);
-		$input = (array) elgg_extract('input', $context, []);
-		$signature = elgg_extract('mac', $context);
+		$page_owner_guid = (int) \elgg_extract('page_owner_guid', $context);
+		$contexts = (array) \elgg_extract('context_stack', $context);
+		$input = (array) \elgg_extract('input', $context, []);
+		$signature = \elgg_extract('mac', $context);
 
 		$data = serialize([$logged_in_user_guid, $page_owner_guid, $contexts, $input]);
-		$mac = elgg_build_hmac($data);
+		$mac = \elgg_build_hmac($data);
 
 		if (!$mac->matchesToken($signature)) {
 			throw new \Elgg\Exceptions\InvalidParameterException("Request signature is invalid");
 		}
 
-		elgg_set_context_stack($contexts);
-		elgg_set_config("input", $input);
-		elgg_set_page_owner_guid($page_owner_guid);
+		\elgg_set_context_stack($contexts);
+		\elgg_set_config("input", $input);
+		\elgg_set_page_owner_guid($page_owner_guid);
 
 		return true;
 	}

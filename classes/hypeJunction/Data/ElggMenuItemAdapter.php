@@ -54,7 +54,7 @@ class ElggMenuItemAdapter {
 			$data['children'][] = $adapter->export($params);
 		}
 
-		$data = elgg_trigger_plugin_hook('adapter:menu_item', "menu:$this->menu_name", $params, $data);
+		$data = \elgg_trigger_plugin_hook('adapter:menu_item', "menu:$this->menu_name", $params, $data);
 
 		return $data;
 	}

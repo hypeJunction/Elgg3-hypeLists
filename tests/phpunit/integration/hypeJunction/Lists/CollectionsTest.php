@@ -77,14 +77,14 @@ class CollectionsTest extends IntegrationTestCase {
 	// --- elgg_register_collection / elgg_get_collection globals ---
 
 	public function testElggGetCollectionReturnsNullForUnregisteredName(): void {
-		$this->assertNull(elgg_get_collection('collection:never-registered-' . uniqid()));
+		$this->assertNull(\elgg_get_collection('collection:never-registered-' . uniqid()));
 	}
 
 	public function testElggRegisterCollectionAndGetCollection(): void {
 		$name = 'collection:global-' . uniqid();
-		elgg_register_collection($name, DefaultEntityCollection::class);
+		\elgg_register_collection($name, DefaultEntityCollection::class);
 
-		$collection = elgg_get_collection($name);
+		$collection = \elgg_get_collection($name);
 
 		$this->assertInstanceOf(CollectionInterface::class, $collection);
 		$this->assertInstanceOf(DefaultEntityCollection::class, $collection);
@@ -175,7 +175,7 @@ class CollectionsTest extends IntegrationTestCase {
 
 	public function testAddFilterAccumulatesFilters(): void {
 		$user = $this->createUser();
-		elgg_get_session()->setLoggedInUser($user);
+		\elgg_get_session()->setLoggedInUser($user);
 		try {
 			$c = new DefaultEntityCollection();
 			$c->addFilter(IsOwnedBy::class, $user);
@@ -186,7 +186,7 @@ class CollectionsTest extends IntegrationTestCase {
 			$this->assertSame(IsOwnedBy::class, $filters[0]->class);
 			$this->assertSame(SubtypeFilter::class, $filters[1]->class);
 		} finally {
-			elgg_get_session()->removeLoggedInUser();
+			\elgg_get_session()->removeLoggedInUser();
 			$user->delete();
 		}
 	}

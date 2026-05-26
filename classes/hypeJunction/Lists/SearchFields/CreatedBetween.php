@@ -23,17 +23,17 @@ class CreatedBetween extends SearchField {
 			'fields' => [
 				[
 					'#type' => 'date',
-					'#label' => elgg_echo("sort:{$this->collection->getType()}:search:created_after"),
+					'#label' => \elgg_echo("sort:{$this->collection->getType()}:search:created_after"),
 					'timestamp' => true,
 					'name' => "{$name}[created_after]",
-					'value' => elgg_extract('created_after', $value),
+					'value' => \elgg_extract('created_after', $value),
 				],
 				[
 					'#type' => 'date',
-					'#label' => elgg_echo("sort:{$this->collection->getType()}:search:created_before"),
+					'#label' => \elgg_echo("sort:{$this->collection->getType()}:search:created_before"),
 					'timestamp' => true,
 					'name' => "{$name}[created_before]",
-					'value' => elgg_extract('created_before', $value),
+					'value' => \elgg_extract('created_before', $value),
 				],
 			],
 		];

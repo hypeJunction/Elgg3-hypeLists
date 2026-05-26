@@ -25,13 +25,13 @@ class Subtype extends SearchField {
 
 		$subtype_options = ['' => ''];
 		foreach ($subtypes as $subtype) {
-			$subtype_options[$subtype] = elgg_echo("collection:object:$subtype");
+			$subtype_options[$subtype] = \elgg_echo("collection:object:$subtype");
 		}
 
 		return [
 			'#type' => 'select',
-			'#label' => elgg_echo("sort:{$this->collection->getType()}:subtype:label"),
-			'placeholder' => elgg_echo("sort:{$this->collection->getType()}:subtype:placeholder"),
+			'#label' => \elgg_echo("sort:{$this->collection->getType()}:subtype:label"),
+			'placeholder' => \elgg_echo("sort:{$this->collection->getType()}:subtype:placeholder"),
 			'name' => $this->getName(),
 			'value' => $this->getValue(),
 			'options_values' => $subtype_options,

@@ -17,10 +17,10 @@ class SearchKeyword extends SearchField {
 	public function getField() {
 		return [
 			'#type' => 'text',
-			'#label' => elgg_echo("sort:{$this->collection->getType()}:search:label"),
+			'#label' => \elgg_echo("sort:{$this->collection->getType()}:search:label"),
 			'name' => $this->getName(),
 			'value' => $this->getValue(),
-			'placeholder' => elgg_echo("sort:{$this->collection->getType()}:search:placeholder"),
+			'placeholder' => \elgg_echo("sort:{$this->collection->getType()}:search:placeholder"),
 		];
 	}
 

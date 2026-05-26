@@ -71,21 +71,21 @@ abstract class Collection implements CollectionInterface {
 		$options['subtypes'] = $this->getSubtypes();
 
 		if (!isset($options['limit'])) {
-			$limit = elgg_extract('limit', $this->params);
+			$limit = \elgg_extract('limit', $this->params);
 
 			if (!isset($limit)) {
 				$list_options = $this->getListOptions();
 
-				$list_type = elgg_extract('list_type', $list_options, 'list');
+				$list_type = \elgg_extract('list_type', $list_options, 'list');
 
-				$limit = ($list_type == 'gallery') ? 12 : elgg_get_config('default_limit');
+				$limit = ($list_type == 'gallery') ? 12 : \elgg_get_config('default_limit');
 			}
 
 			$options['limit'] = $limit;
 		}
 
 		if (!isset($options['offset'])) {
-			$offset = elgg_extract('offset', $this->params, 0);
+			$offset = \elgg_extract('offset', $this->params, 0);
 			$options['offset'] = $offset;
 		}
 
@@ -132,7 +132,7 @@ abstract class Collection implements CollectionInterface {
 	final public function addFilter($class, ElggEntity $target = null, array $params = []) {
 		$this->filters[] = (object) [
 			'class' => $class,
-			'target' => $target ? : elgg_get_logged_in_user_entity(),
+			'target' => $target ? : \elgg_get_logged_in_user_entity(),
 			'params' => $params,
 		];
 	}
@@ -177,15 +177,15 @@ abstract class Collection implements CollectionInterface {
 		$vars['items'] = $list->get($vars['limit'], $vars['offset']);
 		$vars['count'] = $list->count();
 
-		$query = _elgg_services()->request->getParams();
+		$query = \_elgg_services()->request->getParams();
 		unset($query['limit']);
 		unset($query['offset']);
 		unset($query['_route']);
 
-		$vars['base_url'] = elgg_http_add_url_query_elements($this->getURL(), $query);
+		$vars['base_url'] = \elgg_http_add_url_query_elements($this->getURL(), $query);
 		$vars['list_id'] = md5($this->getURL());
 
-		return elgg_view('collection/list', $vars);
+		return \elgg_view('collection/list', $vars);
 	}
 
 	/**
@@ -193,8 +193,8 @@ abstract class Collection implements CollectionInterface {
 	 */
 	final public function export() {
 
-		$viewtype = elgg_get_viewtype();
-		elgg_set_viewtype('default');
+		$viewtype = \elgg_get_viewtype();
+		\elgg_set_viewtype('default');
 
 		$list = $this->getList();
 
@@ -233,14 +233,14 @@ abstract class Collection implements CollectionInterface {
 		$data['_related'] = array_values($data['_related']);
 
 		$url = current_page_url();
-		$url = substr($url, strlen(elgg_get_site_url()));
+		$url = substr($url, strlen(\elgg_get_site_url()));
 		if ($data['count'] && $offset > 0) {
 			$prev_offset = $offset - $limit;
 			if ($prev_offset < 0) {
 				$prev_offset = 0;
 			}
 
-			$data['_links']['prev'] = elgg_http_add_url_query_elements($url, [
+			$data['_links']['prev'] = \elgg_http_add_url_query_elements($url, [
 				'offset' => $prev_offset,
 			]);
 		} else {
@@ -249,14 +249,14 @@ abstract class Collection implements CollectionInterface {
 
 		if ($data['count'] > $limit + $offset) {
 			$next_offset = $offset + $limit;
-			$data['_links']['next'] = elgg_http_add_url_query_elements($url, [
+			$data['_links']['next'] = \elgg_http_add_url_query_elements($url, [
 				'offset' => $next_offset,
 			]);
 		} else {
 			$data['_links']['next'] = false;
 		}
 
-		elgg_set_viewtype($viewtype);
+		\elgg_set_viewtype($viewtype);
 
 		return $data;
 	}
@@ -307,7 +307,7 @@ abstract class Collection implements CollectionInterface {
 		$params = $this->params;
 		$params['collection'] = $this;
 
-		return elgg_trigger_plugin_hook('search:fields', $this->getId(), $params, $fields);
+		return \elgg_trigger_plugin_hook('search:fields', $this->getId(), $params, $fields);
 	}
 
 	/**
@@ -327,7 +327,7 @@ abstract class Collection implements CollectionInterface {
 			$owner = $target;
 			
 			if (!$owner || ($owner instanceof \ElggUser && $owner->guid != $target->guid)) {
-				$owner = elgg_get_logged_in_user_entity();
+				$owner = \elgg_get_logged_in_user_entity();
 			}
 
 			if (!$owner) {
@@ -339,7 +339,7 @@ abstract class Collection implements CollectionInterface {
 				continue;
 			}
 
-			$href = elgg_generate_url("add:$type:$subtype", [
+			$href = \elgg_generate_url("add:$type:$subtype", [
 				'guid' => $owner->guid,
 			]);
 
@@ -347,7 +347,7 @@ abstract class Collection implements CollectionInterface {
 				continue;
 			}
 
-			$text = elgg_echo("add:$type:$subtype");
+			$text = \elgg_echo("add:$type:$subtype");
 
 			// register the title menu item
 			$menu[] = \ElggMenuItem::factory([
