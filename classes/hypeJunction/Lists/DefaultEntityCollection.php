@@ -29,7 +29,7 @@ class DefaultEntityCollection extends Collection {
 	 * @return string
 	 */
 	public function getDisplayName() {
-		return elgg_echo('collection:default');
+		return \elgg_echo('collection:default');
 	}
 
 	/**
@@ -45,7 +45,7 @@ class DefaultEntityCollection extends Collection {
 	 * @return mixed
 	 */
 	public function getType() {
-		return elgg_extract('types', $this->params);
+		return \elgg_extract('types', $this->params);
 	}
 
 	/**
@@ -53,7 +53,7 @@ class DefaultEntityCollection extends Collection {
 	 * @return string|string[]
 	 */
 	public function getSubtypes() {
-		return elgg_extract('subtypes', $this->params);
+		return \elgg_extract('subtypes', $this->params);
 	}
 
 	/**
@@ -84,7 +84,7 @@ class DefaultEntityCollection extends Collection {
 	 * @return string
 	 */
 	public function getURL() {
-		return elgg_get_current_url();
+		return \elgg_get_current_url();
 	}
 
 	/**

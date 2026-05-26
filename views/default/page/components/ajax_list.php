@@ -27,7 +27,7 @@ $list_items = [];
 
 if (is_array($items) || $items instanceof ElggBatch) {
 	foreach ($items as $item) {
-		$item_view = elgg_view_list_item($item, $vars);
+		$item_view = \elgg_view_list_item($item, $vars);
 		if (!$item_view) {
 			continue;
 		}
@@ -50,13 +50,13 @@ if (is_array($items) || $items instanceof ElggBatch) {
 			$id = "item-{$item->getType()}-{$item->id}";
 		}
 
-		$list_items[] = elgg_format_element('li', [
+		$list_items[] = \elgg_format_element('li', [
 			'id' => $id,
 			'class' => implode(' ', $item_classes),
 		], $item_view);
 	}
 }
 
-echo elgg_format_element('ul', [
+echo \elgg_format_element('ul', [
 	'class' => implode(' ', $list_class),
 ], implode('', $list_items));

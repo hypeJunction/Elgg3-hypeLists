@@ -51,7 +51,7 @@ class EntityList extends Entities {
 		$types = $this->options->type_subtype_pairs;
 		if (count($types) === 1) {
 			$type = array_key_first($types);
-			$fields = elgg_trigger_event_results('search:fields', $type, $options, $fields);
+			$fields = \elgg_trigger_event_results('search:fields', $type, $options, $fields);
 		}
 
 		$query = strip_tags((string) $query);
@@ -65,7 +65,7 @@ class EntityList extends Entities {
 		$query_parts = array_unique(array_filter($words));
 
 		$query = function (QueryBuilder $qb, $alias) use ($fields, $query_parts) {
-			return _elgg_services()->search->buildSearchWhereQuery($qb, $alias, $fields, $query_parts);
+			return \_elgg_services()->search->buildSearchWhereQuery($qb, $alias, $fields, $query_parts);
 		};
 
 		$this->options->where(new WhereClause($query));

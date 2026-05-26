@@ -30,8 +30,8 @@ class CollectionItemAdapter {
 	 */
 	public function export(array $params = []) {
 
-		$viewtype = elgg_get_viewtype();
-		elgg_set_viewtype('default');
+		$viewtype = \elgg_get_viewtype();
+		\elgg_set_viewtype('default');
 
 		$data = (array) $this->entity->toObject();
 
@@ -40,8 +40,8 @@ class CollectionItemAdapter {
 
 		$params['entity'] = $this->entity;
 
-		$data = elgg_trigger_event_results('adapter:entity', "$type:$subtype", $params, $data);
-		$data = elgg_trigger_event_results('adapter:entity', $type, $params, $data);
+		$data = \elgg_trigger_event_results('adapter:entity', "$type:$subtype", $params, $data);
+		$data = \elgg_trigger_event_results('adapter:entity', $type, $params, $data);
 
 		$expand = function($elem) use ($params, &$expand) {
 			if ($elem instanceof \ElggEntity) {
@@ -56,7 +56,7 @@ class CollectionItemAdapter {
 			return $elem;
 		};
 
-		elgg_set_viewtype($viewtype);
+		\elgg_set_viewtype($viewtype);
 
 		return $expand($data);
 	}
