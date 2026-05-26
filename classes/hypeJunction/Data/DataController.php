@@ -24,27 +24,27 @@ class DataController {
 	 */
 	public function __invoke(Request $request) {
 
-		_elgg_services()->logger->disable();
+		\_elgg_services()->logger->disable();
 
-		elgg_set_viewtype('json');
+		\elgg_set_viewtype('json');
 
 		// We don't want Ajax API to wrap our responses
-		_elgg_services()->request->headers->remove('X-Requested-With');
+		\_elgg_services()->request->headers->remove('X-Requested-With');
 
-		$log_level = _elgg_services()->logger->getLevel();
+		$log_level = \_elgg_services()->logger->getLevel();
 
-		elgg_set_http_header('Content-Type: application/json');
+		\elgg_set_http_header('Content-Type: application/json');
 
 		$resource = $request->getParam('segments');
 
 		try {
-			if (!elgg_view_exists("resources/data/$resource")) {
+			if (!\elgg_view_exists("resources/data/$resource")) {
 				throw new PageNotFoundException('Unknown resource', ELGG_HTTP_NOT_IMPLEMENTED);
 			}
 
 			Page::restoreContext();
 
-			$json = elgg_view_resource("data/$resource", $request->getParams());
+			$json = \elgg_view_resource("data/$resource", $request->getParams());
 			if (!$json) {
 				$json = json_encode(new \stdClass());
 			}
@@ -69,15 +69,15 @@ class DataController {
 			}
 		}
 
-		$response['system_messages'] = _elgg_services()->systemMessages->dumpRegister();
+		$response['system_messages'] = \_elgg_services()->systemMessages->dumpRegister();
 
 		if ($log_level) {
-			$response['log'] = array_filter(_elgg_services()->logger->enable(), function ($e) use ($log_level) {
+			$response['log'] = array_filter(\_elgg_services()->logger->enable(), function ($e) use ($log_level) {
 				return $e['level'] >= $log_level;
 			});
 		}
 
-		return elgg_ok_response(json_encode($response));
+		return \elgg_ok_response(json_encode($response));
 	}
 
 	/**
@@ -91,12 +91,12 @@ class DataController {
 	 */
 	public static function getEntity($type = null, $subtype = null) {
 		$guid = get_input('guid');
-		if (!elgg_entity_exists($guid)) {
+		if (!\elgg_entity_exists($guid)) {
 			throw new EntityNotFoundException('Entity does not exist');
 		}
 
 		$entity = get_entity($guid);
-		if (!elgg_instanceof($entity, $type, $subtype)) {
+		if (!\elgg_instanceof($entity, $type, $subtype)) {
 			throw new EntityPermissionsException('Entity is not accessible');
 		}
 
