@@ -171,7 +171,7 @@ class Extender {
 			$return[$field] = $entity->$field;
 		}
 
-		$return['_counters']['friends'] = \elgg_get_total_friends($entity);
+		$return['_counters']['friends'] = function_exists('elgg_get_total_friends') ? \elgg_get_total_friends($entity) : 0;
 		$return['_links']['friends'] = \elgg_http_add_url_query_elements("user/friends", [
 			'guid' => $entity->guid,
 		]);
@@ -221,7 +221,7 @@ class Extender {
 		$return['access']['membership'] = $entity->membership;
 		$return['access']['group_acl'] = $entity->group_acl;
 
-		$return['_counters']['members'] = \elgg_get_total_members($entity);
+		$return['_counters']['members'] = function_exists('elgg_get_total_members') ? \elgg_get_total_members($entity) : 0;
 		$return['_links']['members'] = \elgg_http_add_url_query_elements("group/members", [
 			'guid' => $entity->guid,
 		]);
@@ -289,8 +289,8 @@ class Extender {
 			return;
 		}
 
-		$return['_counters']['comments'] = \elgg_get_total_comments($entity);
-		$return['_counters']['likes'] = \elgg_get_total_likes($entity);
+		$return['_counters']['comments'] = function_exists('elgg_get_total_comments') ? \elgg_get_total_comments($entity) : 0;
+		$return['_counters']['likes'] = function_exists('elgg_get_total_likes') ? \elgg_get_total_likes($entity) : 0;
 
 		return $return;
 	}
