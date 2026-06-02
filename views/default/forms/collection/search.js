@@ -6,6 +6,7 @@ define(function (require) {
 	var xhr;
 	var Ajax = require('elgg/Ajax');
 	var lightbox = require('elgg/lightbox');
+	var i18n = require('elgg/i18n');
 
 	$(document).on('submit', '.elgg-form-sortable-list', function (e) {
 		var $form = $(this);
@@ -30,7 +31,7 @@ define(function (require) {
 			}
 
 			if ($new.length === 0) {
-				elgg.register_error(elgg.echo('sort:search:empty'));
+				elgg.register_error(i18n.echo('sort:search:empty'));
 			} else {
 				var $list = $new.find('.elgg-sortable-list-view');
 				$container.find('.elgg-sortable-list-view').replaceWith($list);

@@ -4,6 +4,7 @@ define(function (require) {
 	var $ = require('jquery');
 	var spinner = require('elgg/spinner');
 	var Ajax = require('elgg/Ajax');
+	var i18n = require('elgg/i18n');
 
 	/**
 	 * List constructor
@@ -126,19 +127,19 @@ define(function (require) {
 			self.$list.on('goToPage.hypeList', function (e, pageIndex) {
 				e.stopPropagation();
 				this.goToPage(pageIndex);
-			}.bind(self));
+			}.on(self));
 			self.$list.on('refresh.hypeList fetchNewItems.hypeList', function (e, pageIndex, goToPage) {
 				e.stopPropagation();
 				this.fetchNewItems(pageIndex, goToPage);
-			}.bind(self));
+			}.on(self));
 			self.$list.on('removeItems.hypeList', function (e, $items) {
 				e.stopPropagation();
 				this.removeItems($items);
-			}.bind(self));
+			}.on(self));
 			self.$list.on('addFetchedItems.hypeList', function (e, ajaxData, pageIndex, goToPage) {
 				e.stopPropagation();
 				this.addFetchedItems(ajaxData, pageIndex, goToPage);
-			}.bind(self));
+			}.on(self));
 
 			if (self.options.selectorDelete) {
 				$(self.options.selectorDelete).off('click'); // remove confirm handlers in earlier Elgg versions
@@ -658,7 +659,7 @@ define(function (require) {
 			}
 			// the handler for default confirm has been killed in bindEvents
 			if ($(this).is('[data-confirm],.elgg-requires-confirmation')) {
-				var confirmText = $(this).data('confirm') || elgg.echo('question:areyousure');
+				var confirmText = $(this).data('confirm') || i18n.echo('question:areyousure');
 				if (!confirm(confirmText)) {
 					return false;
 				}

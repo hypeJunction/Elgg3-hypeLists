@@ -18,7 +18,10 @@ use hypeJunction\Data\Extender;
  */
 class BootstrapTest extends IntegrationTestCase {
 
-	public function getPluginID(): string {
+	/**
+     * @return string
+     */
+    public function getPluginID(): string {
 		return 'hypelists';
 	}
 

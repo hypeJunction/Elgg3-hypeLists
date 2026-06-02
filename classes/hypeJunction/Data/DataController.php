@@ -93,7 +93,9 @@ class DataController {
 		}
 
 		$entity = get_entity($guid);
-		if (!\elgg_instanceof($entity, $type, $subtype)) {
+		if (!($entity instanceof \ElggEntity
+			&& (empty($type) || $entity->getType() === $type)
+			&& (empty($subtype) || $entity->getSubtype() === $subtype))) {
 			throw new EntityPermissionsException('Entity is not accessible');
 		}
 

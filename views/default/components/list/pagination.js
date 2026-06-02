@@ -3,6 +3,7 @@ define(function (require) {
 	var elgg = require('elgg');
 	var $ = require('jquery');
 	var hypeList = require('components/list/list');
+	var i18n = require('elgg/i18n');
 	/**
 	 * hypeListPagination constructor
 	 * Inherits from hypeList constructor
@@ -141,16 +142,16 @@ define(function (require) {
 					break;
 				case 'before' :
 					text = (pageIndex === 1 || pageIndex === self.options.totalPages) ?
-							elgg.echo(self.options.keyTextRemaining) :
-							elgg.echo(self.options.keyTextBefore, [self.options.limit]);
+							i18n.echo(self.options.keyTextRemaining) :
+							i18n.echo(self.options.keyTextBefore, [self.options.limit]);
 					itemText = (active || disabled) ? null : text;
 					attr.rel = 'prev';
 					attr.class = 'elgg-before';
 					break;
 				case 'after' :
 					text = (pageIndex === 1 || pageIndex === self.options.totalPages) ?
-							elgg.echo(self.options.keyTextRemaining) :
-							elgg.echo(self.options.keyTextAfter, [self.options.limit]);
+							i18n.echo(self.options.keyTextRemaining) :
+							i18n.echo(self.options.keyTextAfter, [self.options.limit]);
 					itemText = (active || disabled) ? null : text;
 					attr.rel = 'prev';
 					attr.class = 'elgg-after';

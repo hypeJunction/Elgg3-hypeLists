@@ -40,7 +40,7 @@ class Extender {
 		$return['time_created'] = $entity->time_created;
 		$return['time_updated'] = $entity->time_updated;
 
-		$return['location'] = $entity->getLocation();
+		$return['location'] = $entity->location;
 		$return['latitude'] = $entity->getLatitude();
 		$return['longitude'] = $entity->getLongitude();
 
@@ -162,7 +162,7 @@ class Extender {
 			return;
 		}
 
-		$fields = (array) \elgg_get_config('profile_fields');
+		$fields = (array) \elgg()->fields->get('user', 'user');
 		foreach ($fields as $field => $field_type) {
 			if (isset($return[$field])) {
 				continue;
@@ -207,7 +207,7 @@ class Extender {
 			return;
 		}
 
-		$fields = (array) \elgg_get_config('group');
+		$fields = (array) \elgg()->fields->get('group', 'group');
 		foreach ($fields as $field => $field_type) {
 			if (isset($return[$field])) {
 				continue;

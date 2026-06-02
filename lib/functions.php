@@ -19,7 +19,7 @@ function hypelists_wrap_list_view_hook(\Elgg\Hook $hook) {
 	$vars = $hook->getParam('vars');
 
 	$pagination = elgg_extract('pagination', $vars);
-	$pagination_type = elgg_extract('pagination_type', $vars, elgg_get_plugin_setting('pagination_type', 'hypeLists'));
+	$pagination_type = elgg_extract('pagination_type', $vars, elgg_get_plugin_setting('pagination_type', 'hypelists'));
 
 	if ($pagination === false) {
 		return;

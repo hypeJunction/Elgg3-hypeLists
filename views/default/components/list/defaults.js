@@ -1,5 +1,6 @@
 define(function (require) {
 	var elgg = require('elgg');
+	var i18n = require('elgg/i18n');
 	return {
 		baseUrl: false, // Data source
 		count: 0, // Number of items in the list
@@ -16,8 +17,8 @@ define(function (require) {
 		classVisible: 'elgg-discoverable', // CSS class for visible elements
 		classHidden: 'hidden', // CSS class for hidden elements
 		textNoResults: '', // Text displayed when no items were found in the list
-		textNext: elgg.echo('next'), // Text for next link
-		textPrev: elgg.echo('previous'), // Text for previous link
+		textNext: i18n.echo('next'), // Text for next link
+		textPrev: i18n.echo('previous'), // Text for previous link
 		keyTextBefore: 'lists:load:before', // Language key for before link (will receive limit as parameter)
 		keyTextAfter: 'lists:load:after', // Language key for before link (will receive limit as parameter)
 		keyTextRemaining: 'lists:load:remaining', // Language key for show remaining items link

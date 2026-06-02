@@ -24,21 +24,35 @@ use Elgg\Exceptions\InvalidParameterException;
  */
 class CollectionsTest extends IntegrationTestCase {
 
-	public function getPluginID(): string {
+	/**
+     * @return string
+     */
+    public function getPluginID(): string {
 		return 'hypelists';
 	}
 
-	public function up(): void {}
-	public function down(): void {}
+	/**
+     * @return void
+     */
+    public function up(): void {}
+	/**
+     * @return void
+     */
+    public function down(): void {}
 
 	// --- Collections service ---
-
-	public function testCollectionsBuildReturnsNullForUnregisteredName(): void {
+    /**
+     * @return void
+     */
+    public function testCollectionsBuildReturnsNullForUnregisteredName(): void {
 		$service = elgg()->collections;
 		$this->assertNull($service->build('collection:unknown-' . uniqid()));
 	}
 
-	public function testCollectionsRegisterAndBuildReturnsCollectionInstance(): void {
+	/**
+     * @return void
+     */
+    public function testCollectionsRegisterAndBuildReturnsCollectionInstance(): void {
 		$service = elgg()->collections;
 		$name = 'collection:test-' . uniqid();
 		$service->register($name, DefaultEntityCollection::class);
@@ -49,7 +63,10 @@ class CollectionsTest extends IntegrationTestCase {
 		$this->assertInstanceOf(DefaultEntityCollection::class, $collection);
 	}
 
-	public function testCollectionsBuildThrowsForNonCollectionClass(): void {
+	/**
+     * @return void
+     */
+    public function testCollectionsBuildThrowsForNonCollectionClass(): void {
 		$service = elgg()->collections;
 		$name = 'collection:bad-' . uniqid();
 		$service->register($name, \stdClass::class);
@@ -58,7 +75,10 @@ class CollectionsTest extends IntegrationTestCase {
 		$service->build($name);
 	}
 
-	public function testCollectionsBuildPassesTargetAndParams(): void {
+	/**
+     * @return void
+     */
+    public function testCollectionsBuildPassesTargetAndParams(): void {
 		$service = elgg()->collections;
 		$name = 'collection:params-' . uniqid();
 		$service->register($name, DefaultEntityCollection::class);
@@ -75,12 +95,17 @@ class CollectionsTest extends IntegrationTestCase {
 	}
 
 	// --- elgg_register_collection / elgg_get_collection globals ---
-
-	public function testElggGetCollectionReturnsNullForUnregisteredName(): void {
+    /**
+     * @return void
+     */
+    public function testElggGetCollectionReturnsNullForUnregisteredName(): void {
 		$this->assertNull(\elgg_get_collection('collection:never-registered-' . uniqid()));
 	}
 
-	public function testElggRegisterCollectionAndGetCollection(): void {
+	/**
+     * @return void
+     */
+    public function testElggRegisterCollectionAndGetCollection(): void {
 		$name = 'collection:global-' . uniqid();
 		\elgg_register_collection($name, DefaultEntityCollection::class);
 
@@ -91,28 +116,42 @@ class CollectionsTest extends IntegrationTestCase {
 	}
 
 	// --- DefaultEntityCollection identity ---
-
-	public function testDefaultEntityCollectionGetId(): void {
+    /**
+     * @return void
+     */
+    public function testDefaultEntityCollectionGetId(): void {
 		$c = new DefaultEntityCollection();
 		$this->assertSame('collection:default', $c->getId());
 	}
 
-	public function testDefaultEntityCollectionGetCollectionType(): void {
+	/**
+     * @return void
+     */
+    public function testDefaultEntityCollectionGetCollectionType(): void {
 		$c = new DefaultEntityCollection();
 		$this->assertSame('default', $c->getCollectionType());
 	}
 
-	public function testDefaultEntityCollectionGetTypeFromParams(): void {
+	/**
+     * @return void
+     */
+    public function testDefaultEntityCollectionGetTypeFromParams(): void {
 		$c = new DefaultEntityCollection(null, ['types' => 'user']);
 		$this->assertSame('user', $c->getType());
 	}
 
-	public function testDefaultEntityCollectionGetSubtypesFromParams(): void {
+	/**
+     * @return void
+     */
+    public function testDefaultEntityCollectionGetSubtypesFromParams(): void {
 		$c = new DefaultEntityCollection(null, ['subtypes' => 'blog']);
 		$this->assertSame('blog', $c->getSubtypes());
 	}
 
-	public function testDefaultEntityCollectionGetTargetReturnsPassedEntity(): void {
+	/**
+     * @return void
+     */
+    public function testDefaultEntityCollectionGetTargetReturnsPassedEntity(): void {
 		$user = $this->createUser();
 		try {
 			$c = new DefaultEntityCollection($user);
@@ -122,28 +161,38 @@ class CollectionsTest extends IntegrationTestCase {
 		}
 	}
 
-	public function testDefaultEntityCollectionGetParamsReturnsConstructorParams(): void {
+	/**
+     * @return void
+     */
+    public function testDefaultEntityCollectionGetParamsReturnsConstructorParams(): void {
 		$params = ['types' => 'object', 'limit' => 20];
 		$c = new DefaultEntityCollection(null, $params);
 		$this->assertSame($params, $c->getParams());
 	}
 
 	// --- Collection search query ---
-
-	public function testSetAndGetSearchQueryRoundtrip(): void {
+    /**
+     * @return void
+     */
+    public function testSetAndGetSearchQueryRoundtrip(): void {
 		$c = new DefaultEntityCollection();
 		$c->setSearchQuery('hello world');
 		$this->assertSame('hello world', $c->getSearchQuery());
 	}
 
-	public function testDefaultSearchQueryIsEmpty(): void {
+	/**
+     * @return void
+     */
+    public function testDefaultSearchQueryIsEmpty(): void {
 		$c = new DefaultEntityCollection();
 		$this->assertSame('', $c->getSearchQuery());
 	}
 
 	// --- Collection sorts ---
-
-	public function testAddSortAccumulatesSorts(): void {
+    /**
+     * @return void
+     */
+    public function testAddSortAccumulatesSorts(): void {
 		$c = new DefaultEntityCollection();
 		$c->addSort(TimeCreated::class, 'desc');
 		$c->addSort(Alpha::class, 'asc');
@@ -155,12 +204,18 @@ class CollectionsTest extends IntegrationTestCase {
 		$this->assertSame(Alpha::class, $sorts[1]->class);
 	}
 
-	public function testGetSortsDefaultsToEmpty(): void {
+	/**
+     * @return void
+     */
+    public function testGetSortsDefaultsToEmpty(): void {
 		$c = new DefaultEntityCollection();
 		$this->assertSame([], $c->getSorts());
 	}
 
-	public function testGetSortOptionsReturnsExpectedClasses(): void {
+	/**
+     * @return void
+     */
+    public function testGetSortOptionsReturnsExpectedClasses(): void {
 		$c = new DefaultEntityCollection();
 		$options = $c->getSortOptions();
 		$this->assertContains(Alpha::class, $options);
@@ -172,8 +227,10 @@ class CollectionsTest extends IntegrationTestCase {
 	}
 
 	// --- Collection filters ---
-
-	public function testAddFilterAccumulatesFilters(): void {
+    /**
+     * @return void
+     */
+    public function testAddFilterAccumulatesFilters(): void {
 		$user = $this->createUser();
 		\elgg_get_session()->setLoggedInUser($user);
 		try {
@@ -191,20 +248,28 @@ class CollectionsTest extends IntegrationTestCase {
 		}
 	}
 
-	public function testGetFiltersDefaultsToEmpty(): void {
+	/**
+     * @return void
+     */
+    public function testGetFiltersDefaultsToEmpty(): void {
 		$c = new DefaultEntityCollection();
 		$this->assertSame([], $c->getFilters());
 	}
 
 	// --- Collection::getList returns EntityList ---
-
-	public function testGetListReturnsEntityList(): void {
+    /**
+     * @return void
+     */
+    public function testGetListReturnsEntityList(): void {
 		$c = new DefaultEntityCollection(null, ['types' => 'object']);
 		$list = $c->getList();
 		$this->assertInstanceOf(EntityList::class, $list);
 	}
 
-	public function testGetListRespectsPaginationParams(): void {
+	/**
+     * @return void
+     */
+    public function testGetListRespectsPaginationParams(): void {
 		$c = new DefaultEntityCollection(null, ['limit' => 7, 'offset' => 3]);
 		$list = $c->getList();
 		$opts = $list->getOptions();
@@ -213,43 +278,60 @@ class CollectionsTest extends IntegrationTestCase {
 	}
 
 	// --- DefaultEntityCollection search options include CreatedBetween ---
-
-	public function testGetSearchOptionsIncludesCreatedBetween(): void {
+    /**
+     * @return void
+     */
+    public function testGetSearchOptionsIncludesCreatedBetween(): void {
 		$c = new DefaultEntityCollection();
 		$this->assertContains(CreatedBetweenField::class, $c->getSearchOptions());
 	}
 
 	// --- EntityList validation ---
-
-	public function testEntityListAddSortThrowsForNonSorterClass(): void {
+    /**
+     * @return void
+     */
+    public function testEntityListAddSortThrowsForNonSorterClass(): void {
 		$list = new EntityList([]);
 		$this->expectException(\InvalidArgumentException::class);
 		$list->addSort(\stdClass::class);
 	}
 
-	public function testEntityListAddFilterThrowsForNonFilterClass(): void {
+	/**
+     * @return void
+     */
+    public function testEntityListAddFilterThrowsForNonFilterClass(): void {
 		$list = new EntityList([]);
 		$this->expectException(\InvalidArgumentException::class);
 		$list->addFilter(\stdClass::class);
 	}
 
 	// --- All filter ---
-
-	public function testAllFilterIdReturnsAll(): void {
+    /**
+     * @return void
+     */
+    public function testAllFilterIdReturnsAll(): void {
 		$this->assertSame('all', All::id());
 	}
 
-	public function testAllFilterBuildReturnsNull(): void {
+	/**
+     * @return void
+     */
+    public function testAllFilterBuildReturnsNull(): void {
 		$this->assertNull(All::build());
 	}
 
 	// --- IsOwnedBy filter ---
-
-	public function testIsOwnedByFilterId(): void {
+    /**
+     * @return void
+     */
+    public function testIsOwnedByFilterId(): void {
 		$this->assertSame('is_owned_by', IsOwnedBy::id());
 	}
 
-	public function testIsOwnedByFilterBuildWithTargetReturnsWhereClause(): void {
+	/**
+     * @return void
+     */
+    public function testIsOwnedByFilterBuildWithTargetReturnsWhereClause(): void {
 		$user = $this->createUser();
 		try {
 			$clause = IsOwnedBy::build($user);
@@ -259,7 +341,10 @@ class CollectionsTest extends IntegrationTestCase {
 		}
 	}
 
-	public function testIsOwnedByFilterBuildWithGuidParamReturnsWhereClause(): void {
+	/**
+     * @return void
+     */
+    public function testIsOwnedByFilterBuildWithGuidParamReturnsWhereClause(): void {
 		$user = $this->createUser();
 		try {
 			$clause = IsOwnedBy::build(null, ['guids' => [$user->guid]]);
@@ -270,16 +355,24 @@ class CollectionsTest extends IntegrationTestCase {
 	}
 
 	// --- IsContainedBy filter ---
-
-	public function testIsContainedByFilterId(): void {
+    /**
+     * @return void
+     */
+    public function testIsContainedByFilterId(): void {
 		$this->assertSame('is_contained_by', IsContainedBy::id());
 	}
 
-	public function testIsContainedByFilterBuildWithNullTargetReturnsNull(): void {
+	/**
+     * @return void
+     */
+    public function testIsContainedByFilterBuildWithNullTargetReturnsNull(): void {
 		$this->assertNull(IsContainedBy::build(null));
 	}
 
-	public function testIsContainedByFilterBuildWithTargetReturnsWhereClause(): void {
+	/**
+     * @return void
+     */
+    public function testIsContainedByFilterBuildWithTargetReturnsWhereClause(): void {
 		$user = $this->createUser();
 		try {
 			$clause = IsContainedBy::build($user);
@@ -290,32 +383,48 @@ class CollectionsTest extends IntegrationTestCase {
 	}
 
 	// --- SubtypeFilter ---
-
-	public function testSubtypeFilterId(): void {
+    /**
+     * @return void
+     */
+    public function testSubtypeFilterId(): void {
 		$this->assertSame('subtype', SubtypeFilter::id());
 	}
 
-	public function testSubtypeFilterBuildWithNoSubtypeReturnsNull(): void {
+	/**
+     * @return void
+     */
+    public function testSubtypeFilterBuildWithNoSubtypeReturnsNull(): void {
 		$this->assertNull(SubtypeFilter::build(null, []));
 	}
 
-	public function testSubtypeFilterBuildWithSubtypeReturnsWhereClause(): void {
+	/**
+     * @return void
+     */
+    public function testSubtypeFilterBuildWithSubtypeReturnsWhereClause(): void {
 		$clause = SubtypeFilter::build(null, ['subtype' => 'blog']);
 		$this->assertInstanceOf(WhereClause::class, $clause);
 	}
 
 	// --- CreatedBetween filter ---
-
-	public function testCreatedBetweenFilterId(): void {
+    /**
+     * @return void
+     */
+    public function testCreatedBetweenFilterId(): void {
 		$this->assertSame('created_between', CreatedBetween::id());
 	}
 
-	public function testCreatedBetweenFilterBuildAlwaysReturnsWhereClause(): void {
+	/**
+     * @return void
+     */
+    public function testCreatedBetweenFilterBuildAlwaysReturnsWhereClause(): void {
 		$clause = CreatedBetween::build(null, []);
 		$this->assertInstanceOf(WhereClause::class, $clause);
 	}
 
-	public function testCreatedBetweenFilterBuildWithDatesReturnsWhereClause(): void {
+	/**
+     * @return void
+     */
+    public function testCreatedBetweenFilterBuildWithDatesReturnsWhereClause(): void {
 		$clause = CreatedBetween::build(null, [
 			'created_after' => strtotime('-7 days'),
 			'created_before' => time(),
