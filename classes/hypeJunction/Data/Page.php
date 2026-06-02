@@ -13,14 +13,13 @@ class Page {
 	 * and validate request signature, when /data endpoints are
 	 * accessed
 	 *
-	 * @param string $hook   "elgg.data"
-	 * @param string $type   "page"
-	 * @param array  $return Data
-	 * @param array  $params Hook params
+	 * @param \Elgg\Event $event "elgg.data", "page" event
 	 *
 	 * @return array
 	 */
-	public static function captureContext($hook, $type, $return, $params) {
+	public static function captureContext(\Elgg\Event $event) {
+
+		$return = (array) $event->getValue();
 
 		$page_owner_guid = 0;
 		$page_owner_export = null;

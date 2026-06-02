@@ -96,13 +96,17 @@ class DataController {
 		}
 
 		$entity = get_entity($guid);
-		if (!\elgg_instanceof($entity, $type, $subtype)) {
+		if (!$entity instanceof \ElggEntity
+			|| (!empty($type) && $entity->type !== $type)
+			|| (!empty($subtype) && $entity->getSubtype() !== $subtype)) {
 			throw new EntityPermissionsException('Entity is not accessible');
 		}
 
-		$public_subtypes = get_registered_entity_types($entity->type);
-		if (!empty($public_subtypes) && !in_array($entity->getSubtype(), $public_subtypes)) {
-			throw new EntityPermissionsException("\"{$entity->getSubtype()}\" is not a public subtype");
+		if (function_exists('get_registered_entity_types')) {
+			$public_subtypes = get_registered_entity_types($entity->type);
+			if (!empty($public_subtypes) && !in_array($entity->getSubtype(), $public_subtypes)) {
+				throw new EntityPermissionsException("\"{$entity->getSubtype()}\" is not a public subtype");
+			}
 		}
 
 		return $entity;
