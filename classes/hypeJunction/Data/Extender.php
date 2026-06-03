@@ -75,6 +75,7 @@ class Extender {
 			]);
 		}
 
+		// TODO(6.x): elgg_get_registered_tag_metadata_names() removed in 6.x — no 1:1 replacement; resolve manually
 		$tag_names = \elgg_get_registered_tag_metadata_names();
 		foreach ($tag_names as $tag_name) {
 			$return[$tag_name] = [];
