@@ -75,21 +75,6 @@ class Extender {
 			]);
 		}
 
-		// TODO(6.x): elgg_get_registered_tag_metadata_names() removed in 6.x — no 1:1 replacement; resolve manually
-		$tag_names = \elgg_get_registered_tag_metadata_names();
-		foreach ($tag_names as $tag_name) {
-			$return[$tag_name] = [];
-			foreach ((array) $entity->$tag_name as $tag) {
-				$return[$tag_name][] = [
-					'label' => $tag,
-					'url' => \elgg_http_add_url_query_elements(\elgg_normalize_url('search'), [
-						'q' => $tag,
-						'search_type' => 'tags',
-					]),
-				];
-			}
-		}
-
 		return $return;
 	}
 

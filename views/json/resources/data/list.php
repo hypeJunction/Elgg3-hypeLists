@@ -7,9 +7,6 @@ $public_metadata = [
 	'excerpt',
 ];
 
-// TODO(6.x): elgg_get_registered_tag_metadata_names() removed in 6.x — no 1:1 replacement; resolve manually
-$public_metadata = array_merge($public_metadata, (array) elgg_get_registered_tag_metadata_names());
-
 $public_metadata = elgg_trigger_event_results('public_metadata', 'search', [], $public_metadata);
 
 $options = [
