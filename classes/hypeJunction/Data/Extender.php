@@ -72,7 +72,9 @@ class Extender {
 			]);
 		}
 
-		$tag_names = elgg_get_registered_tag_metadata_names();
+		// TODO(7.x): elgg_get_registered_tag_metadata_names() removed in 7.x with no core replacement.
+		// Was a dynamic registry of taggable metadata names; fall back to the conventional 'tags' field.
+		$tag_names = ['tags'];
 		foreach ($tag_names as $tag_name) {
 			$return[$tag_name] = [];
 			foreach ((array) $entity->$tag_name as $tag) {
@@ -111,7 +113,9 @@ class Extender {
 		$return['_permissions']['edit'] = $entity->canEdit();
 		$return['_permissions']['comment'] = $entity->canComment();
 
-		$registered = elgg_get_registered_entity_types();
+		// TODO(7.x): elgg_get_registered_entity_types() removed in 7.x with no clean 1:1 replacement
+		// (was a type/subtype registry). Needs a project-specific source of registered type/subtype pairs.
+		$registered = (array) elgg_get_config('registered_entities'); // TODO(7.x): elgg_get_registered_entity_types removed; using config registry (may be empty)
 
 		foreach ($registered as $type => $subtypes) {
 			if ($subtypes) {
@@ -161,7 +165,11 @@ class Extender {
 			$return[$field] = $entity->$field;
 		}
 
-		$return['_counters']['friends'] = elgg_get_total_friends($entity);
+		$return['_counters']['friends'] = elgg_count_entities([
+			'types' => 'user',
+			'relationship' => 'friend',
+			'relationship_guid' => $entity->guid,
+		]);
 		$return['_links']['friends'] = elgg_http_add_url_query_elements('user/friends', [
 			'guid' => $entity->guid,
 		]);
@@ -208,7 +216,12 @@ class Extender {
 		$return['access']['membership'] = $entity->membership;
 		$return['access']['group_acl'] = $entity->group_acl;
 
-		$return['_counters']['members'] = elgg_get_total_members($entity);
+		$return['_counters']['members'] = elgg_count_entities([
+			'types' => 'user',
+			'relationship' => 'member',
+			'relationship_guid' => $entity->guid,
+			'inverse_relationship' => true,
+		]);
 		$return['_links']['members'] = elgg_http_add_url_query_elements('group/members', [
 			'guid' => $entity->guid,
 		]);
