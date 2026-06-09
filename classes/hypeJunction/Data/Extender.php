@@ -113,9 +113,9 @@ class Extender {
 		$return['_permissions']['edit'] = $entity->canEdit();
 		$return['_permissions']['comment'] = $entity->canComment();
 
-		// TODO(7.x): elgg_get_registered_entity_types() removed in 7.x with no clean 1:1 replacement
-		// (was a type/subtype registry). Needs a project-specific source of registered type/subtype pairs.
-		$registered = (array) elgg_get_config('registered_entities'); // TODO(7.x): elgg_get_registered_entity_types removed; using config registry (may be empty)
+		// Elgg 7.x: elgg_get_registered_entity_types() removed; the searchable capability
+		// registry returns the same [type => [subtypes]] shape this loop expects.
+		$registered = elgg_entity_types_with_capability('searchable');
 
 		foreach ($registered as $type => $subtypes) {
 			if ($subtypes) {
