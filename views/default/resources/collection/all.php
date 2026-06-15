@@ -46,6 +46,6 @@ $layout = elgg_view_layout('default', [
 	'filter_value' => 'all',
 ]);
 
-echo elgg_view_page($title, $layout, 'default', [
+echo elgg_view_page($collection->getDisplayName(), $layout, 'default', [
 	'collection' => $collection,
 ]);
