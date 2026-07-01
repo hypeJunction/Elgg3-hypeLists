@@ -3,10 +3,8 @@
 $request = elgg_extract('request', $vars);
 /* @var $request \Elgg\Request */
 
-$guid = $request->getParam('guid');
-elgg_entity_gatekeeper($guid);
-
-$entity = get_entity($guid);
+$guid = (int) $request->getParam('guid');
+$entity = elgg_entity_gatekeeper($guid);
 
 $collections = elgg()->collections;
 /* @var $collections \hypeJunction\Lists\Collections */
@@ -48,6 +46,6 @@ $layout = elgg_view_layout('default', [
 	'target' => $entity,
 ]);
 
-echo elgg_view_page($title, $layout, 'default', [
+echo elgg_view_page($collection->getDisplayName(), $layout, 'default', [
 	'collection' => $collection,
 ]);

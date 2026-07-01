@@ -1,7 +1,9 @@
-define(function (require) {
-	var elgg = require('elgg');
-	return {
-		baseUrl: false, // Data source
+import * as elgg from 'elgg';
+import i18n from 'elgg/i18n';
+const echo = (...args) => i18n.echo(...args);
+
+export default {
+	baseUrl: false, // Data source
 		count: 0, // Number of items in the list
 		offset: 0, // Current offset from the beginning of the list
 		offsetKey: 'offset', // Offset key
@@ -16,8 +18,8 @@ define(function (require) {
 		classVisible: 'elgg-discoverable', // CSS class for visible elements
 		classHidden: 'hidden', // CSS class for hidden elements
 		textNoResults: '', // Text displayed when no items were found in the list
-		textNext: elgg.echo('next'), // Text for next link
-		textPrev: elgg.echo('previous'), // Text for previous link
+		textNext: echo('next'), // Text for next link
+		textPrev: echo('previous'), // Text for previous link
 		keyTextBefore: 'lists:load:before', // Language key for before link (will receive limit as parameter)
 		keyTextAfter: 'lists:load:after', // Language key for before link (will receive limit as parameter)
 		keyTextRemaining: 'lists:load:remaining', // Language key for show remaining items link
@@ -29,4 +31,3 @@ define(function (require) {
 		selectorDelete: '.elgg-menu-item-delete > a', // CSS selector of an anchor that will trigger a delete action
 		listClasses: 'elgg-list'
 	};
-});

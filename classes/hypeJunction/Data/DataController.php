@@ -90,17 +90,19 @@ class DataController {
 	 * @throws HttpException
 	 */
 	public static function getEntity($type = null, $subtype = null) {
-		$guid = get_input('guid');
-		if (!elgg_entity_exists($guid)) {
+		$guid = (int) get_input('guid');
+		if (!$guid || !elgg_entity_exists($guid)) {
 			throw new EntityNotFoundException('Entity does not exist');
 		}
 
 		$entity = get_entity($guid);
-		if (!elgg_instanceof($entity, $type, $subtype)) {
+		if (!$entity instanceof ElggEntity
+			|| ($type && $entity->type !== $type)
+			|| ($subtype && $entity->getSubtype() !== $subtype)) {
 			throw new EntityPermissionsException('Entity is not accessible');
 		}
 
-		$public_subtypes = get_registered_entity_types($entity->type);
+		$public_subtypes = elgg_entity_types_with_capability('searchable')[$entity->type] ?? [];
 		if (!empty($public_subtypes) && !in_array($entity->getSubtype(), $public_subtypes)) {
 			throw new EntityPermissionsException("\"{$entity->getSubtype()}\" is not a public subtype");
 		}

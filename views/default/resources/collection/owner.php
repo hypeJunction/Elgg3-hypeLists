@@ -5,7 +5,7 @@ $request = elgg_extract('request', $vars);
 
 $username = $request->getParam('username');
 if ($username) {
-	$user = get_user_by_username($username);
+	$user = elgg_get_user_by_username($username);
 } else {
 	$user = elgg_get_logged_in_user_entity();
 }
@@ -56,6 +56,6 @@ $layout = elgg_view_layout('default', [
 	'target' => $user,
 ]);
 
-echo elgg_view_page($title, $layout, 'default', [
+echo elgg_view_page($collection->getDisplayName(), $layout, 'default', [
 	'collection' => $collection,
 ]);
