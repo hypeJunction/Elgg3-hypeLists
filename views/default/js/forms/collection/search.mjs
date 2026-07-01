@@ -2,7 +2,8 @@ import * as elgg from 'elgg';
 import $ from 'jquery';
 import Ajax from 'elgg/Ajax';
 import lightbox from 'elgg/lightbox';
-import { echo } from 'elgg/i18n';
+import i18n from 'elgg/i18n';
+const echo = (...args) => i18n.echo(...args);
 
 var xhr;
 
