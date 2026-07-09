@@ -123,7 +123,10 @@ class Extender {
 					$return['_permissions']['write'][$type][$subtype] = $entity->canWriteToContainer(0, $type, $subtype);
 				}
 			} else {
-				$return['_permissions']['write'][$type] = $entity->canWriteToContainer(0, $type);
+				// Elgg 7 requires BOTH $type and $subtype. A type with no registered
+				// subtypes (user, group, site) names its subtype after the type, so
+				// pass it through rather than throwing on an empty string.
+				$return['_permissions']['write'][$type] = $entity->canWriteToContainer(0, $type, $type);
 			}
 		}
 
